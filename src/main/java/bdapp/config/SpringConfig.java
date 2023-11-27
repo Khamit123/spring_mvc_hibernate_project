@@ -1,12 +1,11 @@
-package config;
+package bdapp.config;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,7 +16,7 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan()
+@ComponentScan("bdapp")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
@@ -48,22 +47,36 @@ public class SpringConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
-        registry.viewResolver(resolver);
         resolver.setContentType("text/html; charset=UTF-8");
-    }
-    @Bean
-    public DataSource dataSource(){
-        DriverManagerDataSource dataSource =new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/pen_factory");
-        dataSource.setUsername("root");
-        dataSource.setPassword("кщще");
-        return dataSource;
-    }
-    @Bean
-    public JdbcTemplate jdbcTemplate(){
-        return new JdbcTemplate(dataSource());
+        registry.viewResolver(resolver);
+
     }
 
 
 }
+//<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+//        destroy-method="close">
+//<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+//<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/my_db?useSSL=false&amp;serverTimezone=UTC" />
+//<property name="user" value="bestuser" />
+//<property name="password" value="bestuser" />
+//</bean>
+//
+//<bean id="sessionFactory"
+//class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+//<property name="dataSource" ref="dataSource" />
+//<property name="packagesToScan" value="com.zaurtregulov.spring.mvc_hibernate_aop.entity" />
+//<property name="hibernateProperties">
+//<props>
+//<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+//<prop key="hibernate.show_sql">true</prop>
+//</props>
+//</property>
+//</bean>
+//
+//<bean id="transactionManager"
+//class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+//<property name="sessionFactory" ref="sessionFactory"/>
+//</bean>
+//
+//<tx:annotation-driven transaction-manager="transactionManager" />

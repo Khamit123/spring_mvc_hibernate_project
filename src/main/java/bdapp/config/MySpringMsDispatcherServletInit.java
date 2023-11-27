@@ -1,4 +1,4 @@
-package config;
+package bdapp.config;
 
 
 import jakarta.servlet.ServletContext;

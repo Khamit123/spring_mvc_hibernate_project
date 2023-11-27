@@ -5,8 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-<div th:each="d : ${data}">
-    <a th:text="${d.getName + ', ' + person.getDepartment_id()}">user</a>
-</div>
+
+<table>
+    <thead>
+    <tr >
+        <th th:each="name:${names}" th:text="${name}" ></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="staff:${staffs}">
+        <td><span th:text="${staff.getName}"> Title </span></td>
+        <td><span th:text="${staff.getLastName}"> Author </span></td>
+        <td><span th:text="${staff.getMiddleName}"> Author </span></td>
+        <td><span th:text="${staff.getSalary}"> Author </span></td>
+        <td><span th:text="${staff.getPhoneNumber}"> Author </span></td>
+        <td><span th:text="${staff.getEmail}"> Author </span></td>
+        <td><span th:text="${staff.getPost}"> Author </span></td>
+        <td><span th:text="${staff.getBirthday}"> Author </span></td>
+        <td><span th:text="${staff.GetisWorking}"> Author </span></td>
+        <td><span th:text="${staff.getDateOfHire}"> Author </span></td>
+        <td><span th:text="${staff.getDateOfSalary}"> Author </span></td>
+        <td><span th:text="${staff.getDepartment().getName}"> Author </span></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
