@@ -1,6 +1,5 @@
 package bdapp.config;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
-import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("bdapp")
@@ -51,8 +49,6 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
 
     }
-
-
 }
 //<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 //        destroy-method="close">

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        /* Стили таблицы (IKSWEB) */
+        table.iksweb{text-decoration: none;border-collapse:collapse;width:100%;text-align:center;}
+        table.iksweb th{font-weight:normal;font-size:14px; color:#ffffff;background-color:#354251;}
+        table.iksweb td{font-size:13px;color:#354251;}
+        table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
+        table.iksweb tr:hover td{color:#354251;cursor:default;}
+    </style>
+</head>
+<body>
+<form th:method="GET" th:action="@{/staff/findingStaffs}" th:object="${staff}">
+    <label for="name">Введите имя</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+
+    <label for="lastName">Введите фамилию</label>
+    <input type="text" th:field="*{lastName}" id="lastName">
+    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+
+    <label for="lastName">Введите почту</label>
+    <input type="text" th:field="*{email}" id="email">
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+    <br/>
+    <input type="submit" value="Поиск">
+
+</form>
+
+<table class="iksweb">
+    <thead>
+    <tr >
+        <th th:each="name:${names}" th:text="${name}" ></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="staff:${staffs}">
+        <td><span th:text="${staff.getName}"> Title </span></td>
+        <td><span th:text="${staff.getLastName}"> Author </span></td>
+        <td><span th:text="${staff.getMiddleName}"> Author </span></td>
+        <td><span th:text="${staff.getSalary}"> Author </span></td>
+        <td><span th:text="${staff.getPhoneNumber}"> Author </span></td>
+        <td><span th:text="${staff.getEmail}"> Author </span></td>
+        <td><span th:text="${staff.getPost}"> Author </span></td>
+        <td><span th:text="${staff.getBirthday}"> Author </span></td>
+        <td><span th:text="${staff.GetisWorking}"> Author </span></td>
+        <td><span th:text="${staff.getDateOfHire}"> Author </span></td>
+        <td><span th:text="${staff.getDateOfSalary}"> Author </span></td>
+        <td><span th:text="${staff.getDepartment().getName}"> Author </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
