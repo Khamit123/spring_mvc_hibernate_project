@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class StaffDAO {
         String name=staff.getName();
         String lastName=staff.getLastName();
         String email=staff.getEmail();
+        Department department=staff.getDepartment();
         if(name==null || name==""){
             name="1=1";
         }
@@ -47,11 +49,17 @@ public class StaffDAO {
         if(email==null || email==""){
             email="1=1";
         }
-        else email= " lastName ='" +email +"'";
+        else email= " email ='" +email +"'";
+        if(department.getName()=="" || department.getName()==null){
+            department.setName("1=1");
+        }
+        else department.setName( " department.name ='" +department.getName() +"'");
 
 
-        System.out.println("from Staff where "+name+" and" + lastName);
-        List<Staff> s= session.createQuery("from Staff where "+name+" and " + lastName +" and "+email).getResultList();
+        System.out.println("from Staff where "+name+" and" + lastName+" and ");
+        Query query= session.createQuery("from Staff where "+name+" and " + lastName +" " +
+                "and "+email +" and " +department.getName());
+        List s =query.getResultList();
 
         session.getTransaction().commit();
 

@@ -72,6 +72,7 @@ public class Staff {
     }
 
     public Staff() {
+        this.department=new Department();
     }
 
     public int getId() {
@@ -180,8 +181,8 @@ public class Staff {
         return department;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment(String department) {
+        this.department.setName(department);
     }
 
     @Override
