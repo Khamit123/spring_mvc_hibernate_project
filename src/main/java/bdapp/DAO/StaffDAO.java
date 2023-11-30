@@ -66,20 +66,37 @@ public class StaffDAO {
         return s;
     }
 
+    public Staff getOneStaff(int id){
+        Session session =sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Staff staff1= session.get(Staff.class,id);
+        session.getTransaction().commit();
+        return staff1;
+    }
+
+
     public void updateStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-       Staff staff1= session.get(Staff.class,staff.getId());
-       staff1=staff;
+
+       session.merge(staff);
        session.getTransaction().commit();
 
     }
     public void deleteStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.delete(staff);
+       Staff staff1= session.get(Staff.class,staff.getId());
+       session.delete(staff1);
+
         session.getTransaction().commit();
 
+    }
+    public  void addStaff(Staff staff){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.persist(staff);
+        session.getTransaction().commit();
     }
 
 

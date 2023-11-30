@@ -3,8 +3,11 @@ package bdapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -16,42 +19,52 @@ public class Staff {
     private int id;
 
     @Column(name = "name")
+    @NotEmpty
     private String name;
 
-
+    @NotNull
+    @NotEmpty
     @Column(name = "last_name")
     private String lastName;
-
+    @NotNull
+    @NotEmpty
     @Column(name = "middle_name")
     private String middleName;
-
+    @NotNull
     @Column(name = "salary")
     private int salary;
-
+    @NotNull
+    @NotEmpty
     @Column(name = "phone_number")
     private String phoneNumber;
-
+    @NotNull
+    @NotEmpty
     @Column(name = "email")
     @Email
     private String email;
-
+    @NotNull
+    @NotEmpty
     @Column(name = "post")
     private String post;
 
-
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "birthday")
     private Date birthday;
 
-
+    @NotNull
     @Column(name ="isworking")
     private boolean isWorking;
-
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date_of_hire")
     private Date dateOfHire;
-
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date_of_slary")
-    private Date dateOfSalary;
 
+    private Date dateOfSalary;
+    @NotNull
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
@@ -196,5 +209,24 @@ public class Staff {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, lastName, middleName, salary, phoneNumber, email, post, birthday, isWorking, dateOfHire, dateOfSalary, department);
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", salary=" + salary +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", post='" + post + '\'' +
+                ", birthday=" + birthday +
+                ", isWorking=" + isWorking +
+                ", dateOfHire=" + dateOfHire +
+                ", dateOfSalary=" + dateOfSalary +
+                ", department=" + department +
+                '}';
     }
 }

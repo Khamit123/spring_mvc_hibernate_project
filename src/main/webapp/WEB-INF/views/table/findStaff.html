@@ -64,16 +64,16 @@ button {
 <form style="" th:method="GET" th:action="@{/staff/findingStaffs}" th:object="${staff}">
     <label for="name">Введите имя</label>
     <input type="text" th:field="*{name}" id="name">
-    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>-->
 
 
     <label for="lastName">Введите фамилию</label>
     <input type="text" th:field="*{lastName}" id="lastName">
-    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>-->
 
     <label for="lastName">Введите почту</label>
     <input type="text" th:field="*{email}" id="email">
-    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+<!--    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>-->
 
 
     <label for="department.name">Отдел</label>
@@ -101,6 +101,7 @@ button {
     </tr>
     </thead>
     <tbody>
+
     <tr th:each="staff:${staffs}">
         <td><span th:text="${staff.getName}"> Имя </span></td>
         <td><span th:text="${staff.getLastName}"> Фамилия </span></td>
@@ -114,14 +115,18 @@ button {
         <td><span th:text="${staff.getDateOfHire}"> Дата нанятия </span></td>
         <td><span th:text="${staff.getDateOfSalary}">Дата изменения зарплаты</span></td>
         <td><span th:text="${staff.getDepartment().getName}"> Отдел </span></td>
-        <td><form th:method="PATCH" th:action="@{/staff/updateStaff/{id} (id=${staff.getId})}" th:object="${staff}">
+
+        <td><form th:method="GET" th:action="@{/staff/updateStaff/{id} (id=${staff.getId})} ">
             <button>Изменить</button>
         </form></td>
-        <td><form th:method="DELETE" th:action="@{/staff/deleteStaff/{id} (id=${staff.getId})}">
+        <td><form th:method="DELETE" th:action="@{/staff/deleteStaff/{id} (id=${staff.getId})} ">
             <button>Удалить</button>
         </form></td>
     </tr>
     </tbody>
 </table>
+<form th:method="GET" th:action="@{/staff/updateStaff/{id} (id=${staff.getId})}">
+    <button>Добавить нового сотрудника</button>
+</form>
 </body>
 </html>
