@@ -30,6 +30,19 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 }
+button {
+    background-color: #f44336;
+    border-radius: 8px;
+    color: white;
+    padding: 4px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 6px 3px;
+    cursor: pointer;
+}
+
 
 
 
@@ -42,6 +55,8 @@ input[type=submit]:hover {
         table.iksweb td{font-size:13px;color:#354251;}
         table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
         table.iksweb tr:hover td{color:#354251;cursor:default;}
+
+
 
     </style>
 </head>
@@ -60,6 +75,7 @@ input[type=submit]:hover {
     <input type="text" th:field="*{email}" id="email">
     <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
+
     <label for="department.name">Отдел</label>
     <select  id="department.name" name="department.name">
         <option value="" >Все</option>
@@ -68,6 +84,8 @@ input[type=submit]:hover {
         <option th:selected="*{department.name=='Отдел кадров'}" value="Отдел кадров">Отдел кадров</option>
         <option th:selected="*{department.name=='Отдел техобслуживания'}"value="Отдел техобслуживания">Отдел техобслуживания</option>
         <option th:selected="*{department.name=='Отдел ИТ'}" value="Отдел ИТ">Отдел ИТ</option>
+
+ 
     </select>
     <br/>
     <input type="submit" value="Поиск">
@@ -78,22 +96,30 @@ input[type=submit]:hover {
     <thead>
     <tr>
         <th th:each="name:${names}" th:text="${name}"></th>
+        <th>Изменение</th>
+        <th>Удаление</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="staff:${staffs}">
-        <td><span th:text="${staff.getName}"> Title </span></td>
-        <td><span th:text="${staff.getLastName}"> Author </span></td>
-        <td><span th:text="${staff.getMiddleName}"> Author </span></td>
-        <td><span th:text="${staff.getSalary}"> Author </span></td>
-        <td><span th:text="${staff.getPhoneNumber}"> Author </span></td>
-        <td><span th:text="${staff.getEmail}"> Author </span></td>
-        <td><span th:text="${staff.getPost}"> Author </span></td>
-        <td><span th:text="${staff.getBirthday}"> Author </span></td>
-        <td><span th:text="${staff.GetisWorking}"> Author </span></td>
-        <td><span th:text="${staff.getDateOfHire}"> Author </span></td>
-        <td><span th:text="${staff.getDateOfSalary}"> Author </span></td>
-        <td><span th:text="${staff.getDepartment().getName}"> Author </span></td>
+        <td><span th:text="${staff.getName}"> Имя </span></td>
+        <td><span th:text="${staff.getLastName}"> Фамилия </span></td>
+        <td><span th:text="${staff.getMiddleName}"> Отчестов </span></td>
+        <td><span th:text="${staff.getSalary}"> Зарплата </span></td>
+        <td><span th:text="${staff.getPhoneNumber}"> Номер телефона </span></td>
+        <td><span th:text="${staff.getEmail}"> Почта </span></td>
+        <td><span th:text="${staff.getPost}"> Должность </span></td>
+        <td><span th:text="${staff.getBirthday}"> День рождения </span></td>
+        <td><span th:text="${staff.GetisWorking}"> Статус </span></td>
+        <td><span th:text="${staff.getDateOfHire}"> Дата нанятия </span></td>
+        <td><span th:text="${staff.getDateOfSalary}">Дата изменения зарплаты</span></td>
+        <td><span th:text="${staff.getDepartment().getName}"> Отдел </span></td>
+        <td><form th:method="PATCH" th:action="@{/staff/updateStaff/{id} (id=${staff.getId})}" th:object="${staff}">
+            <button>Изменить</button>
+        </form></td>
+        <td><form th:method="DELETE" th:action="@{/staff/deleteStaff/{id} (id=${staff.getId})}">
+            <button>Удалить</button>
+        </form></td>
     </tr>
     </tbody>
 </table>
