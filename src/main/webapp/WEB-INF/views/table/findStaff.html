@@ -75,14 +75,17 @@ button {
     <input type="text" th:field="*{email}" id="email">
     <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
-    <label for="department">Отдел</label>
-    <select id="department" name="department">
-        <option value="">Все</option>
-        <option th:selected="department" value="Бухгалтерия">Бухгалтерия</option>
-        <option value="Служба поддержки">Служба поддержки</option>
-        <option value="Отдел кадров">Отдел кадров</option>
-        <option value="Отдел техобслуживания">Отдел техобслуживания</option>
-        <option value="Отдел ИТ">Отдел ИТ</option>
+
+    <label for="department.name">Отдел</label>
+    <select  id="department.name" name="department.name">
+        <option value="" >Все</option>
+        <option th:selected="*{department.name=='Бухгалтерия'}" value="Бухгалтерия">Бухгалтерия</option>
+        <option th:selected="*{department.name=='Служба поддержки'}" value="Служба поддержки" >Служба поддержки</option>
+        <option th:selected="*{department.name=='Отдел кадров'}" value="Отдел кадров">Отдел кадров</option>
+        <option th:selected="*{department.name=='Отдел техобслуживания'}"value="Отдел техобслуживания">Отдел техобслуживания</option>
+        <option th:selected="*{department.name=='Отдел ИТ'}" value="Отдел ИТ">Отдел ИТ</option>
+
+ 
     </select>
     <br/>
     <input type="submit" value="Поиск">

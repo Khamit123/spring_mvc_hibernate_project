@@ -35,7 +35,7 @@ public class StaffDAO {
         String name=staff.getName();
         String lastName=staff.getLastName();
         String email=staff.getEmail();
-        Department department=staff.getDepartment();
+        String department=staff.getDepartment().getName();
         if(name==null || name==""){
             name="1=1";
         }
@@ -50,20 +50,36 @@ public class StaffDAO {
             email="1=1";
         }
         else email= " email ='" +email +"'";
-        if(department.getName()=="" || department.getName()==null){
-            department.setName("1=1");
+        if(department=="" || department==null){
+            department="1=1";
         }
-        else department.setName( " department.name ='" +department.getName() +"'");
+        else department= " department.name ='" +department +"'";
 
 
         System.out.println("from Staff where "+name+" and" + lastName+" and ");
         Query query= session.createQuery("from Staff where "+name+" and " + lastName +" " +
-                "and "+email +" and " +department.getName());
+                "and "+email +" and " +department);
         List s =query.getResultList();
 
         session.getTransaction().commit();
 
         return s;
+    }
+
+    public void updateStaff(Staff staff){
+        Session session =sessionFactory.getCurrentSession();
+        session.beginTransaction();
+       Staff staff1= session.get(Staff.class,staff.getId());
+       staff1=staff;
+       session.getTransaction().commit();
+
+    }
+    public void deleteStaff(Staff staff){
+        Session session =sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.delete(staff);
+        session.getTransaction().commit();
+
     }
 
 

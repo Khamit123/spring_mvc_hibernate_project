@@ -1,6 +1,7 @@
 package bdapp.controllers;
 
 import bdapp.DAO.StaffDAO;
+import bdapp.model.Department;
 import bdapp.model.Staff;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class StaffController {
     @GetMapping("/findingStaffs")
     public String findingStaffs(Model model, @ModelAttribute ("staff")@Valid Staff staff, BindingResult bindingResult){
         if(bindingResult.hasErrors()) return "table/findStaff";
+
         model.addAttribute("names",staffDAO.getNames());
         model.addAttribute("staffs",staffDAO.getFindStaff(staff));
         return "table/findStaff";

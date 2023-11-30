@@ -42,6 +42,7 @@ public class CompositionOfProductDAO {
         return compositionOfProducts;
     }
 
+
     public String colorConv(String col){
         if(col.equals("b")){
             return "Синий";
