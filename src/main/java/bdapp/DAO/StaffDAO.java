@@ -37,19 +37,19 @@ public class StaffDAO {
         String email=staff.getEmail();
         String department=staff.getDepartment().getName();
         if(name==null || name==""){
-            name="1=1";
+            name="'%'";
         }
-        else name="name ='"+name+"'";
+        else name="'"+name+"%'";
 
         if(lastName==null || lastName==""){
-            lastName="1=1";
+            lastName="'%'";
         }
-        else lastName= " lastName ='" +lastName +"'";
+        else lastName= "'" +lastName +"%'";
 
         if(email==null || email==""){
-            email="1=1";
+            email="'%'";
         }
-        else email= " email ='" +email +"'";
+        else email= "'" +email +"%'";
         if(department=="" || department==null){
             department="1=1";
         }
@@ -57,8 +57,8 @@ public class StaffDAO {
 
 
         System.out.println("from Staff where "+name+" and" + lastName+" and ");
-        Query query= session.createQuery("from Staff where "+name+" and " + lastName +" " +
-                "and "+email +" and " +department);
+        Query query= session.createQuery("from Staff where  name like "+name+" and lastName like " + lastName +" " +
+                "and email like "+email +" and " +department);
         List s =query.getResultList();
 
         session.getTransaction().commit();
@@ -66,20 +66,37 @@ public class StaffDAO {
         return s;
     }
 
+    public Staff getOneStaff(int id){
+        Session session =sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Staff staff1= session.get(Staff.class,id);
+        session.getTransaction().commit();
+        return staff1;
+    }
+
+
     public void updateStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-       Staff staff1= session.get(Staff.class,staff.getId());
-       staff1=staff;
+
+       session.merge(staff);
        session.getTransaction().commit();
 
     }
     public void deleteStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.delete(staff);
+       Staff staff1= session.get(Staff.class,staff.getId());
+       session.delete(staff1);
+
         session.getTransaction().commit();
 
+    }
+    public  void addStaff(Staff staff){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.persist(staff);
+        session.getTransaction().commit();
     }
 
 

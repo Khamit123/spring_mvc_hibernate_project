@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form style="" th:method="POST" th:action="@{/staff/addStaff}" th:object="${staff}">
+    <br/><label for="name">Введите имя</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+
+    <br/> <label for="lastName">Введите фамилию</label>
+    <input type="text" th:field="*{lastName}" id="lastName">
+    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+
+    <br/><label for="middleName">Введите отчество</label>
+    <input type="text" th:field="*{middleName}" id="middleName">
+    <div style="color: red" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}"></div>
+
+
+    <br/> <label for="salary">Введите зарплату</label>
+    <input type="text" th:field="*{salary}" id="salary">
+    <div style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
+
+
+    <br/> <label for="phoneNumber">Введите телефон</label>
+    <input type="text" th:field="*{phoneNumber}" id="phoneNumber">
+    <div style="color: red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
+
+    <br/> <label for="email">Введите почту</label>
+    <input type="text" th:field="*{email}" id="email">
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+    <br/> <label for="post">Выберите должность</label>
+    <input type="text" th:field="*{post}" id="post">
+    <div style="color: red" th:if="${#fields.hasErrors('post')}" th:errors="*{post}"></div>
+
+
+
+    <br/> <label for="birthday">Введите дату рождения</label>
+    <input type="date" th:field="*{birthday}" id="birthday">
+    <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></div>
+
+    <br/> <label for="working">Введите статус</label>
+    <!--    <input type="text" th:field="*{working}" id="working">-->
+    <!--    <div style="color: red" th:if="${#fields.hasErrors('working')}" th:errors="*{working}"></div>-->
+
+    <select  id="working" name="working">
+        <option th:selected="*{#bools.isFalse(working)}" value="false">Не работает</option>
+        <option th:selected="*{#bools.isTrue(working)}" value="true" >Работает</option>
+    </select>
+
+
+    <br/>  <label for="department.name">Отдел</label>
+    <select  id="department.name" name="department.name">
+        <option th:selected="*{department.name=='Бухгалтерия'}" value="Бухгалтерия">Бухгалтерия</option>
+        <option th:selected="*{department.name=='Служба поддержки'}" value="Служба поддержки" >Служба поддержки</option>
+        <option th:selected="*{department.name=='Отдел кадров'}" value="Отдел кадров">Отдел кадров</option>
+        <option th:selected="*{department.name=='Отдел техобслуживания'}" value="Отдел техобслуживания">Отдел техобслуживания</option>
+        <option th:selected="*{department.name=='Отдел ИТ'}" value="Отдел ИТ">Отдел ИТ</option>
+    </select>
+    <br/>
+    <label for="dateOfHire">Введите день найма</label>
+    <input type="date" th:field="*{dateOfHire}" id="dateOfHire">
+    <div style="color: red" th:if="${#fields.hasErrors('dateOfHire')}" th:errors="*{dateOfHire}"></div>
+    <br/>
+    <label for="dateOfSalary">Введите день повышения зарплаты</label>
+    <input type="date" th:field="*{dateOfSalary}" id="dateOfSalary">
+    <div style="color: red" th:if="${#fields.hasErrors('dateOfSalary')}" th:errors="*{dateOfSalary}"></div>
+    <br/>
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>
