@@ -37,19 +37,19 @@ public class StaffDAO {
         String email=staff.getEmail();
         String department=staff.getDepartment().getName();
         if(name==null || name==""){
-            name="1=1";
+            name="'%'";
         }
-        else name="name ='"+name+"'";
+        else name="'"+name+"%'";
 
         if(lastName==null || lastName==""){
-            lastName="1=1";
+            lastName="'%'";
         }
-        else lastName= " lastName ='" +lastName +"'";
+        else lastName= "'" +lastName +"%'";
 
         if(email==null || email==""){
-            email="1=1";
+            email="'%'";
         }
-        else email= " email ='" +email +"'";
+        else email= "'" +email +"%'";
         if(department=="" || department==null){
             department="1=1";
         }
@@ -57,8 +57,8 @@ public class StaffDAO {
 
 
         System.out.println("from Staff where "+name+" and" + lastName+" and ");
-        Query query= session.createQuery("from Staff where "+name+" and " + lastName +" " +
-                "and "+email +" and " +department);
+        Query query= session.createQuery("from Staff where  name like "+name+" and lastName like " + lastName +" " +
+                "and email like "+email +" and " +department);
         List s =query.getResultList();
 
         session.getTransaction().commit();

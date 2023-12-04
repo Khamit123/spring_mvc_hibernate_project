@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -48,7 +48,7 @@ public class Staff {
     private String post;
 
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday")
     private Date birthday;
 
@@ -56,11 +56,11 @@ public class Staff {
     @Column(name ="isworking")
     private boolean isWorking;
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     @Column(name = "date_of_hire")
     private Date dateOfHire;
     @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_slary")
 
     private Date dateOfSalary;
@@ -152,12 +152,16 @@ public class Staff {
         this.post = post;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthday() {
+        if(birthday==null){
+            return "";
+        }
+
+        return birthday.toString();
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthday(String birthday) {
+        this.birthday = Date.valueOf(birthday);
     }
 
     public boolean isWorking() {
@@ -174,20 +178,26 @@ public class Staff {
         isWorking = working;
     }
 
-    public Date getDateOfHire() {
-        return dateOfHire;
+    public String getDateOfHire() {
+        if(dateOfHire==null){
+            return "";
+        }
+        return dateOfHire.toString();
     }
 
-    public void setDateOfHire(Date dateOfHire) {
-        this.dateOfHire = dateOfHire;
+    public void setDateOfHire(String dateOfHire) {
+        this.dateOfHire = Date.valueOf(dateOfHire);
     }
 
-    public Date getDateOfSalary() {
-        return dateOfSalary;
+    public String getDateOfSalary() {
+        if(dateOfSalary==null){
+            return "";
+        }
+        return dateOfSalary.toString();
     }
 
-    public void setDateOfSalary(Date dateOfSalary) {
-        this.dateOfSalary = dateOfSalary;
+    public void setDateOfSalary(String dateOfSalary) {
+        this.dateOfSalary = Date.valueOf(dateOfSalary);
     }
 
     public Department getDepartment() {

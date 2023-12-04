@@ -42,7 +42,7 @@ public class StaffController {
     public String updateStaff(@PathVariable("id") int id,@ModelAttribute("staff")@Valid Staff staff,BindingResult bindingResult){
         if(bindingResult.hasErrors()) return "table/updateStafff";
         staffDAO.updateStaff(staff);
-        return "redirect:/staff/updateStaff/{id}";
+        return "redirect:/staff/findingStaffs";
 
     }
 
