@@ -20,13 +20,6 @@ public class StaffController {
     private StaffDAO staffDAO;
     @Autowired
     private DepartmentDAO departmentDAO;
-    @GetMapping("/allStaffs")
-    public String allStaffs(Model model){
-        model.addAttribute("names",staffDAO.getNames());
-        model.addAttribute("staffs",staffDAO.getAllStaffs());
-        return "table/allStaff";
-    }
-
 
 
     @GetMapping("/findingStaffs")
@@ -41,6 +34,7 @@ public class StaffController {
     public String updateStaffGet(@PathVariable("id") int id,Model model){
         Staff staff=staffDAO.getOneStaff(id);
         model.addAttribute("staff",staff);
+        model.addAttribute("dep",departmentDAO.allDep());
         return "table/updateStafff";
 
     }
@@ -54,7 +48,6 @@ public class StaffController {
 
     @DeleteMapping("/deleteStaff/{id}")
     public String deleteStaff(@ModelAttribute("staff") Staff staff,@PathVariable int id,Model model){
-        System.out.println(staff);
         try{
             staffDAO.deleteStaff(staff);
         }catch (Exception e){

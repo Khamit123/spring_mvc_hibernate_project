@@ -22,9 +22,15 @@ public class Department {
     public Department() {
     }
 
-    public Department(String name) {
+    public Department(int id, String name) {
+        this.id = id;
         this.name = name;
     }
+    public Department(Department department) {
+        this.id = department.getId();
+        this.name = department.getName();
+    }
+
 
     public int getId() {
         return id;

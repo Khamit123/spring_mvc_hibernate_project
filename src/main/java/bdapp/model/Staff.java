@@ -84,9 +84,7 @@ public class Staff {
         this.department = department;
     }
 
-    public Staff() {
-        this.department=new Department();
-    }
+    public Staff() {this.department=new Department();}
 
     public int getId() {
         return id;
@@ -204,8 +202,8 @@ public class Staff {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department.setName(department);
+    public void setDepartment(Department department) {
+        this.department=department;
     }
 
     @Override
