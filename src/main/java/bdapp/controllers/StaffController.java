@@ -1,5 +1,6 @@
 package bdapp.controllers;
 
+import bdapp.DAO.DepartmentDAO;
 import bdapp.DAO.StaffDAO;
 import bdapp.model.Department;
 import bdapp.model.Staff;
@@ -10,11 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/staff")
 public class StaffController {
     @Autowired
     private StaffDAO staffDAO;
+    @Autowired
+    private DepartmentDAO departmentDAO;
     @GetMapping("/allStaffs")
     public String allStaffs(Model model){
         model.addAttribute("names",staffDAO.getNames());
@@ -28,6 +33,7 @@ public class StaffController {
     public String findingStaffs(Model model, @ModelAttribute ("staff")@Valid Staff staff, BindingResult bindingResult){
         model.addAttribute("names",staffDAO.getNames());
         model.addAttribute("staffs",staffDAO.getFindStaff(staff));
+        model.addAttribute("dep",departmentDAO.allDep());
         return "table/findStaff";
     }
 
@@ -47,9 +53,15 @@ public class StaffController {
     }
 
     @DeleteMapping("/deleteStaff/{id}")
-    public String deleteStaff(@ModelAttribute("staff") Staff staff,@PathVariable int id){
+    public String deleteStaff(@ModelAttribute("staff") Staff staff,@PathVariable int id,Model model){
         System.out.println(staff);
-    staffDAO.deleteStaff(staff);
+        try{
+            staffDAO.deleteStaff(staff);
+        }catch (Exception e){
+            model.addAttribute("msg", List.of("Для удаления этого сотрудника необходимо:"," 1.Удалить его из таблицы Техобслуживние", " 2.Удалить его из таблицы Заводы"));
+            return "/table/error";
+        }
+
     return "redirect:/staff/findingStaffs";
     }
 
