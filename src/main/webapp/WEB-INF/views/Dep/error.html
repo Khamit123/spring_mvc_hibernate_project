@@ -7,7 +7,7 @@
 <body>
 <dialog open style="border:1px solid red;border-radius: 2px;position: absolute;bottom: 50%">
     <div th:each="a : ${msg}" th:text="${a}"></div>
-    <form th:method="GET" action="/staff/findingStaffs">
+    <form th:method="GET" action="/department/findDepartment">
         <button style="margin: 0 auto;display: block;">Ок</button>
     </form>
 </dialog>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="head">
+    <style>
+        input[type=text], select {
+            width: 100%;
+            padding: 6px 10px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=text]:focus {
+            border: 3px solid #555;
+        }
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        button {
+            background-color: #f44336;
+            border-radius: 8px;
+            color: white;
+            padding: 4px 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 6px 3px;
+            cursor: pointer;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <header style="background:blue;height:30px">
+        <div class="container">
+            <div style="display: inline-block;color:white;">
+                <form th:method="GET" action="/staff/findingStaffs">
+                <button style="border:none;background:none;color:white;font-size: 16px;">Главная</button>
+                </form>
+            </div>
+            <div style="display: inline-block;" class="dropdown">
+                <button style="border:none;background:none;color:white;font-size: 16px;"type="button"
+                        data-toggle="dropdown">Выбор таблицы
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="/staff/findingStaffs">Сотрудники</a></li>
+                    <li><a href="/department/findDepartment">Отделы</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+</div>
+</body>
+</html>

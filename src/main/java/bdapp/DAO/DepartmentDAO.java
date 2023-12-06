@@ -33,7 +33,7 @@ public class DepartmentDAO {
         if(name==null || name==""){
             name="'%'";
         }
-        else name="'"+name+"%'";
+        else name="'%"+name+"%'";
         Query query= session.createQuery("from Department where  name like "+name);
         List s =query.getResultList();
 

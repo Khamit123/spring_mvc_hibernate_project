@@ -46,7 +46,7 @@ public class DepartmentController {
         try{
             departmentDAO.deleteDepartment(department);
         }catch (Exception e){
-            model.addAttribute("msg", List.of("Для удаления этого сотрудника необходимо:"," 1.Удалить его из таблицы Техобслуживние", " 2.Удалить его из таблицы Заводы"));
+            model.addAttribute("msg", List.of("Для отдела:"," 1.Необходимо убрать из этого отдела  всех сотрудников"));
             return "/Dep/error";
         }
 
@@ -59,7 +59,7 @@ public class DepartmentController {
         return "/Dep/addDep";
     }
 
-    @PostMapping("/addStaff")
+    @PostMapping("/addDepartment")
     public String addStaff(@ModelAttribute("dep") @Valid Department department,BindingResult bindingResult){
         if(bindingResult.hasErrors()) return "Dep/addDep";
         departmentDAO.addDepartment(department);

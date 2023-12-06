@@ -60,6 +60,7 @@ button {
 
     </style>
 </head>
+<div th:insert="~{header :: #head}"></div>
 <body>
 <form style="" th:method="GET" th:action="@{/staff/findingStaffs}" th:object="${staff}">
     <label for="name">Введите имя</label>

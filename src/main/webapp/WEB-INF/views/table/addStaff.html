@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<div th:insert="~{header :: #head}"></div>
 <body>
+
 <form style="" th:method="POST" th:action="@{/staff/addStaff}" th:object="${staff}">
     <br/><label for="name">Введите имя</label>
     <input type="text" th:field="*{name}" id="name">
