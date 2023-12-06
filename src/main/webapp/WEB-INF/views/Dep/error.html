@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<dialog open style="border:1px solid red;border-radius: 2px;position: absolute;bottom: 50%">
+    <div th:each="a : ${msg}" th:text="${a}"></div>
+    <form th:method="GET" action="/staff/findingStaffs">
+        <button style="margin: 0 auto;display: block;">Ок</button>
+    </form>
+</dialog>
+</body>
+</html>

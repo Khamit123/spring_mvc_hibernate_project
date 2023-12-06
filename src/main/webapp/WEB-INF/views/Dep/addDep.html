@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form style="" th:method="POST" th:action="@{/department/addDepartment/{id} (id=${dep.getId()})}" th:object="${dep}">
+    <br/><label for="name">Введите название отдела</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <input type="submit" value="Изменить">
+
+</form>
+</body>
+</html>
