@@ -18,56 +18,55 @@ public class Staff {
 
     @Column(name = "name")
     @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "last_name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Фамилия должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String lastName;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "middle_name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Имя должно содержать только буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Отчество должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String middleName;
-    @NotNull
+    @NotNull(message = "Не должно быть пустым")
     @Column(name = "salary")
     @Max(10000000)
+    @Min(1)
     private int salary;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "phone_number")
-    @Pattern(regexp = "\\d{11}")
+    @Pattern(regexp = "\\d{11}",message = "Номер телефона должен содержать 11 цифр")
     private String phoneNumber;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "email")
-    @Email
+    @Email(message = "Почта должна соответсвовать виду ???@???(знак вопроса - любой символ,причем до знака @ должно быть 2 знака)")
     private String email;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "post")
     private String post;
 
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Не должно быть пустым")
     @Column(name = "birthday")
     private Date birthday;
 
-    @NotNull
+    @NotNull(message = "Не должно быть пустым")
     @Column(name ="isworking")
+
     private boolean isWorking;
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @NotNull(message = "Не должно быть пустым")
     @Column(name = "date_of_hire")
     private Date dateOfHire;
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Не должно быть пустым")
     @Column(name = "date_of_slary")
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfSalary;
-    @NotNull
+    @NotNull(message = "Не должно быть пустым")
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;

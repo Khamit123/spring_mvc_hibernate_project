@@ -27,7 +27,7 @@ public class StaffController {
         model.addAttribute("names",staffDAO.getNames());
         model.addAttribute("staffs",staffDAO.getFindStaff(staff));
         model.addAttribute("dep",departmentDAO.allDep());
-        return "table/findStaff";
+        return "staff/findStaff";
     }
 
     @GetMapping("/updateStaff/{id}")
@@ -35,12 +35,12 @@ public class StaffController {
         Staff staff=staffDAO.getOneStaff(id);
         model.addAttribute("staff",staff);
         model.addAttribute("dep",departmentDAO.allDep());
-        return "table/updateStafff";
+        return "staff/updateStafff";
 
     }
     @PatchMapping("/updateStaff/{id}")
     public String updateStaff(@PathVariable("id") int id,@ModelAttribute("staff")@Valid Staff staff,BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return "table/updateStafff";
+        if(bindingResult.hasErrors()) return "staff/updateStafff";
         staffDAO.updateStaff(staff);
         return "redirect:/staff/findingStaffs";
 
@@ -52,7 +52,7 @@ public class StaffController {
             staffDAO.deleteStaff(staff);
         }catch (Exception e){
             model.addAttribute("msg", List.of("Для удаления этого сотрудника необходимо:"," 1.Удалить его из таблицы Техобслуживние", " 2.Удалить его из таблицы Заводы"));
-            return "/table/error";
+            return "/staff/error";
         }
 
     return "redirect:/staff/findingStaffs";
@@ -61,18 +61,14 @@ public class StaffController {
     @GetMapping("/addStaff")
     public String addStaffGet(@ModelAttribute("staff") Staff staff){
 
-        return "/table/addStaff";
+        return "/staff/addStaff";
     }
 
     @PostMapping("/addStaff")
     public String addStaff(@ModelAttribute("staff") @Valid Staff staff,BindingResult bindingResult){
-       if(bindingResult.hasErrors()) return "table/addStaff";
+       if(bindingResult.hasErrors()) return "staff/addStaff";
         staffDAO.addStaff(staff);
         return "redirect:/staff/findingStaffs";
-    }
-    @GetMapping("/auth")
-    public String auth(){
-        return "/auth";
     }
 
 

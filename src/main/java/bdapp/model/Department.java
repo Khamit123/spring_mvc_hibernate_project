@@ -1,6 +1,7 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class Department {
     private int id;
 
     @Column(name = "name")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Название отдела должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
     @OneToMany(mappedBy = "department",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     private List<Staff> staffList;
