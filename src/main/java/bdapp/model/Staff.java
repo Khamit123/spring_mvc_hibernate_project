@@ -29,11 +29,11 @@ public class Staff {
     @NotNull
     @NotEmpty
     @Column(name = "middle_name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Имя должно содержать только буквы и начинаться с заглавной буквы")
     private String middleName;
     @NotNull
     @Column(name = "salary")
-    @Size(max = 8)
+    @Max(10000000)
     private int salary;
     @NotNull
     @NotEmpty
