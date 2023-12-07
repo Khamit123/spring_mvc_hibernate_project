@@ -1,6 +1,9 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 
 @Entity
 @Table(name = "machine_type", schema = "pen_factory", catalog = "")
@@ -9,12 +12,14 @@ public class MachineType {
     @Id
     @Column(name = "machine_type_id", nullable = false)
     private int machineTypeId;
-    @Basic
+    @NotNull
     @Column(name = "name", nullable = true, length = 30)
     private String name;
-    @Basic
+    @NotNull
     @Column(name = "description", nullable = true, length = -1)
     private String description;
+    @OneToMany(mappedBy = "machineTypeId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
+    List<Machinery> machineryList;
 
     public int getMachineTypeId() {
         return machineTypeId;

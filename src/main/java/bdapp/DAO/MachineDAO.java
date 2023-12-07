@@ -1,56 +1,55 @@
 package bdapp.DAO;
 
-import bdapp.model.Department;
-import bdapp.model.Staff;
+import bdapp.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Component
-public class StaffDAO {
-    private List<String> names=new ArrayList<>(List.of("Имя ","Фамилия ","Отчество ","Зарплата ","Номер телефона ",
-            "Электронная почта ","Должность ","День рождения ","Статус","Дата найма ","Дата повышения зарплаты ","Отдел"));
+public class MachineDAO {
+    private List<String> names=new ArrayList<>(List.of("Название ","Тип","Статус ","Завод ","Техобслуживание "));
+
 
     private SessionFactory sessionFactory =new Configuration()
             .configure("hibernate.cfg.xml")
+            .addAnnotatedClass(Machinery.class).addAnnotatedClass(MachineStatus.class)
+            .addAnnotatedClass(MachineType.class).addAnnotatedClass(Maintenance.class).addAnnotatedClass(Factory.class)
             .addAnnotatedClass(Staff.class).addAnnotatedClass(Department.class)
             .buildSessionFactory();
 
-    public List<Staff> getFindStaff(Staff staff){
+    public List<Machinery> getFindMachine(Machinery machinery){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String name=staff.getName();
-        String lastName=staff.getLastName();
-        String email=staff.getEmail();
-        String department=staff.getDepartment().getName();
-        System.out.println(department);
+        String name=machinery.getName();
+        String factory=machinery.getFactoryId().getName();
+        String status=machinery.getMachineStatusId().getName();
+        String type=machinery.getMachineTypeId();
+        System.out.println(name+"\n"+status+"\n"+factory+"\n"+type);
         if(name==null || name==""){
             name="'%'";
         }
         else name="'"+name+"%'";
 
-        if(lastName==null || lastName==""){
-            lastName="'%'";
+        if(factory=="" || factory==null){
+            factory="'%'";
         }
-        else lastName= "'" +lastName +"%'";
+        else factory= "'" +factory +"%'";
+        if(status=="" || status==null){
+            status="'%'";
+        }
+        else status= "'" +status +"%'";
+        if(type=="" || type==null){
+            type="'%'";
+        }
+        else type= "'" +type +"%'";
 
-        if(email==null || email==""){
-            email="'%'";
-        }
-        else email= "'" +email +"%'";
-        if(department=="" || department==null){
-            department="1=1";
-        }
-        else department= " department.name ='" +department +"'";
 
-        Query query= session.createQuery("from Staff where  name like "+name+" and lastName like " + lastName +" " +
-                "and email like "+email +" and " +department);
+        Query query= session.createQuery("from Machinery where  name like "+name+" and factoryId.name like " + factory +" " +
+                "and machineStatusId.name like "+status +" and machineTypeId.name like" +type);
         List s =query.getResultList();
 
         session.getTransaction().commit();
@@ -70,16 +69,16 @@ public class StaffDAO {
     public void updateStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-       staff.setDepartment( (Department) session.createQuery("from Department where name='"+staff.getDepartment().getName() + "'").getResultList().get(0));
-       session.merge(staff);
-       session.getTransaction().commit();
+        staff.setDepartment( (Department) session.createQuery("from Department where name='"+staff.getDepartment().getName() + "'").getResultList().get(0));
+        session.merge(staff);
+        session.getTransaction().commit();
 
     }
     public void deleteStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-       Staff staff1= session.get(Staff.class,staff.getId());
-       session.delete(staff1);
+        Staff staff1= session.get(Staff.class,staff.getId());
+        session.delete(staff1);
 
         session.getTransaction().commit();
 

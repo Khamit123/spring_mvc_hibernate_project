@@ -1,10 +1,13 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "maintenance", schema = "pen_factory", catalog = "")
 public class Maintenance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -13,13 +16,15 @@ public class Maintenance {
     @Basic
     @Column(name = "date_of_maintenance", nullable = false)
     private Date dateOfMaintenance;
-    @Basic
-    @Column(name = "staff_id", nullable = true)
-    private Integer staffId;
-    @Basic
+    @NotNull
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "staff_id")
+    private Staff staffId;
+    @NotNull
     @Column(name = "what_done", nullable = true, length = -1)
     private String whatDone;
-
+    @OneToMany(mappedBy = "maintenanceId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
+    List<Machinery> machineryList;
     public int getMaintenanceId() {
         return maintenanceId;
     }
@@ -28,21 +33,18 @@ public class Maintenance {
         this.maintenanceId = maintenanceId;
     }
 
-    public Date getDateOfMaintenance() {
-        return dateOfMaintenance;
+    public String getDateOfMaintenance() {
+        if(dateOfMaintenance==null){
+            return "";
+        }
+
+        return dateOfMaintenance.toString();
     }
 
-    public void setDateOfMaintenance(Date dateOfMaintenance) {
-        this.dateOfMaintenance = dateOfMaintenance;
+    public void setDateOfMaintenance(String dateOfMaintenance) {
+        this.dateOfMaintenance = Date.valueOf(dateOfMaintenance);
     }
 
-    public Integer getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Integer staffId) {
-        this.staffId = staffId;
-    }
 
     public String getWhatDone() {
         return whatDone;

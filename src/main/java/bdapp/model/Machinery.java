@@ -1,28 +1,51 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.Objects;
 
 @Entity
+@Table(name = "machinery", schema = "pen_factory", catalog = "")
 public class Machinery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "machine_id", nullable = false)
     private int machineId;
-    @Basic
-    @Column(name = "machine_type_id", nullable = true)
-    private Integer machineTypeId;
-    @Basic
-    @Column(name = "maintenance_id", nullable = true)
-    private Integer maintenanceId;
-    @Basic
-    @Column(name = "factory_id", nullable = true)
-    private Integer factoryId;
-    @Basic
+
+    @NotNull
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name="machine_type_id")
+    private MachineType machineTypeId;
+
+    @NotNull
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "maintenance_id")
+    private Maintenance maintenanceId;
+
+    @NotNull
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "factory_id")
+    private Factory factoryId;
+
     @Column(name = "name", nullable = true, length = 30)
     private String name;
-    @Basic
-    @Column(name = "machine_status_id", nullable = false)
-    private int machineStatusId;
+
+    @NotNull
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @JoinColumn(name = "machine_status_id")
+    private MachineStatus machineStatusId;
+
+    public Machinery() {
+        this.machineTypeId = new MachineType();
+        this.maintenanceId = new Maintenance();
+        this.factoryId = new Factory();
+        this.machineStatusId = new MachineStatus();
+    }
 
     public int getMachineId() {
         return machineId;
@@ -32,27 +55,27 @@ public class Machinery {
         this.machineId = machineId;
     }
 
-    public Integer getMachineTypeId() {
-        return machineTypeId;
+    public String getMachineTypeId() {
+        return machineTypeId.getName();
     }
 
-    public void setMachineTypeId(Integer machineTypeId) {
-        this.machineTypeId = machineTypeId;
+    public void setMachineTypeId(String machineTypeId) {
+        this.machineTypeId.setName(machineTypeId);
     }
 
-    public Integer getMaintenanceId() {
+    public Maintenance getMaintenanceId() {
         return maintenanceId;
     }
 
-    public void setMaintenanceId(Integer maintenanceId) {
+    public void setMaintenanceId(Maintenance maintenanceId) {
         this.maintenanceId = maintenanceId;
     }
 
-    public Integer getFactoryId() {
+    public Factory getFactoryId() {
         return factoryId;
     }
 
-    public void setFactoryId(Integer factoryId) {
+    public void setFactoryId(Factory factoryId) {
         this.factoryId = factoryId;
     }
 
@@ -64,11 +87,11 @@ public class Machinery {
         this.name = name;
     }
 
-    public int getMachineStatusId() {
+    public MachineStatus getMachineStatusId() {
         return machineStatusId;
     }
 
-    public void setMachineStatusId(int machineStatusId) {
+    public void setMachineStatusId(MachineStatus machineStatusId) {
         this.machineStatusId = machineStatusId;
     }
 
@@ -76,29 +99,12 @@ public class Machinery {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Machinery machinery = (Machinery) o;
-
-        if (machineId != machinery.machineId) return false;
-        if (machineStatusId != machinery.machineStatusId) return false;
-        if (machineTypeId != null ? !machineTypeId.equals(machinery.machineTypeId) : machinery.machineTypeId != null)
-            return false;
-        if (maintenanceId != null ? !maintenanceId.equals(machinery.maintenanceId) : machinery.maintenanceId != null)
-            return false;
-        if (factoryId != null ? !factoryId.equals(machinery.factoryId) : machinery.factoryId != null) return false;
-        if (name != null ? !name.equals(machinery.name) : machinery.name != null) return false;
-
-        return true;
+        return machineId == machinery.machineId && machineTypeId.equals(machinery.machineTypeId) && maintenanceId.equals(machinery.maintenanceId) && factoryId.equals(machinery.factoryId) && name.equals(machinery.name) && machineStatusId.equals(machinery.machineStatusId);
     }
 
     @Override
     public int hashCode() {
-        int result = machineId;
-        result = 31 * result + (machineTypeId != null ? machineTypeId.hashCode() : 0);
-        result = 31 * result + (maintenanceId != null ? maintenanceId.hashCode() : 0);
-        result = 31 * result + (factoryId != null ? factoryId.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + machineStatusId;
-        return result;
+        return Objects.hash(machineId, machineTypeId, maintenanceId, factoryId, name, machineStatusId);
     }
 }

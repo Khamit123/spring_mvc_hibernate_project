@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+        /* Стили таблицы (IKSWEB) */
+        table.iksweb{text-decoration: none;border-collapse:collapse;width:100%;text-align:center;}
+        table.iksweb th{font-weight:normal;font-size:14px; color:#ffffff;background-color:#354251;}
+        table.iksweb td{font-size:13px;color:#354251;}
+        table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
+        table.iksweb tr:hover td{color:#354251;cursor:default;}
+
+
+
+    </style>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="GET" th:action="@{/machine/findMachine}" th:object="${mac}">
+  <label for="name">Введите название</label>
+  <input type="text" th:field="*{name}" id="name">
+
+
+  <label for="machineTypeId">Введите тип</label>
+  <input type="text" th:field="*{machineTypeId}" id="machineTypeId">
+
+  <label for="machineStatusId">Введите статус</label>
+  <input type="text" th:field="*{machineStatusId}" id="machineStatusId">
+
+  <label for="factoryId">Введите завод</label>
+  <input type="text" th:field="*{factoryId}" id="factoryId">
+
+
+<!--  <label for="department">Отдел</label>-->
+<!--  <select  id="department" name="department.name">-->
+<!--    <option value="" >Все</option>-->
+<!--    <option th:each="a:${dep}" th:selected="${staff.department.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">-->
+
+<!--  </select>-->
+  <br/>
+  <input type="submit" value="Поиск">
+
+</form>
+
+<table class="iksweb">
+  <thead>
+  <tr>
+    <th th:each="name:${names}" th:text="${name}"></th>
+    <th>Изменение</th>
+    <th>Удаление</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr th:each="mach:${macs}">
+    <td><span th:text="${mach.getName}"> Название </span></td>
+    <td><span th:text="${mach.getMachineTypeId}"> Тип </span></td>
+    <td><span th:text="${mach.getMachineStatusId}"> Статус </span></td>
+    <td><span th:text="${mach.getFactoryId}"> Завод </span></td>
+    <td><span th:text="${mach.getMaintenanceId}"> Техобслуживание </span></td>
+
+    <td><form th:method="GET" th:action="@{/staff/updateStaff} ">
+      <button>Изменить</button>
+    </form></td>
+    <td><form th:method="DELETE" th:action="@{/staff/deleteStaff} ">
+      <button>Удалить</button>
+    </form></td>
+  </tr>
+  </tbody>
+</table>
+<form th:method="GET" th:action="@{/staff/addStaff}">
+  <input type="submit" value="Добавить нового сотрудника">
+</form>
+</body>
+</html>

@@ -2,6 +2,8 @@ package bdapp.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "machine_status", schema = "pen_factory", catalog = "")
 public class MachineStatus {
@@ -9,12 +11,14 @@ public class MachineStatus {
     @Id
     @Column(name = "machine_status_id", nullable = false)
     private int machineStatusId;
-    @Basic
+
     @Column(name = "name", nullable = true, length = 30)
     private String name;
-    @Basic
+
     @Column(name = "description", nullable = true, length = -1)
     private String description;
+    @OneToMany(mappedBy = "machineStatusId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
+    List<Machinery> machineryList;
 
     public int getMachineStatusId() {
         return machineStatusId;
