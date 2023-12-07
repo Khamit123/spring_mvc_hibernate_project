@@ -2,10 +2,7 @@ package bdapp.model;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
@@ -36,7 +33,7 @@ public class Staff {
     private String middleName;
     @NotNull
     @Column(name = "salary")
-    @Pattern(regexp = "\\d{8}")
+    @Size(max = 8)
     private int salary;
     @NotNull
     @NotEmpty
