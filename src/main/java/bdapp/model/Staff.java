@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
@@ -20,22 +21,27 @@ public class Staff {
 
     @Column(name = "name")
     @NotEmpty
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+")
     private String name;
 
     @NotNull
     @NotEmpty
     @Column(name = "last_name")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+")
     private String lastName;
     @NotNull
     @NotEmpty
     @Column(name = "middle_name")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+")
     private String middleName;
     @NotNull
     @Column(name = "salary")
+    @Pattern(regexp = "\\d{8}")
     private int salary;
     @NotNull
     @NotEmpty
     @Column(name = "phone_number")
+    @Pattern(regexp = "\\d{11}")
     private String phoneNumber;
     @NotNull
     @NotEmpty

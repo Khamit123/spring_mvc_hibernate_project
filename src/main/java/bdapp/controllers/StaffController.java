@@ -70,6 +70,10 @@ public class StaffController {
         staffDAO.addStaff(staff);
         return "redirect:/staff/findingStaffs";
     }
+    @GetMapping("/auth")
+    public String auth(){
+        return "/auth";
+    }
 
 
 
