@@ -1,7 +1,10 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
+
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -15,7 +18,8 @@ public class Product {
     private String name;
 
     @Column(name = "price")
-    private Integer price;
+    @Min(1)
+    private int price;
 
     @Column(name = "color")
     private String color;
@@ -36,11 +40,14 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public int getPrice() {
         return price;
     }
 
     public void setPrice(Integer price) {
+        if(price==null){
+            price=0;
+        }
         this.price = price;
     }
 
@@ -51,36 +58,40 @@ public class Product {
     public void setColor(String color) {
         this.color = color;
     }
+    public String getConvColor(){
+        if(color.equals("b")){
+            return "Синий";
+        }
+        if(color.equals("r")){
+            return "Красный";
+        }
+        if(color.equals("g")){
+            return "Зелёный";
+        }
+        if(color.equals("w")){
+            return "Белый";
+        }
+        return null;
+    }
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Product product = (Product) o;
-
-        if (productId != product.productId) return false;
-        if (name != null ? !name.equals(product.name) : product.name != null) return false;
-        if (price != null ? !price.equals(product.price) : product.price != null) return false;
-        if (color != null ? !color.equals(product.color) : product.color != null) return false;
-
-        return true;
+        return productId == product.productId && price == product.price && Objects.equals(name, product.name) && Objects.equals(color, product.color);
     }
 
     @Override
     public int hashCode() {
-        int result = productId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (color != null ? color.hashCode() : 0);
-        return result;
+        return Objects.hash(productId, name, price, color);
     }
 
     public Product() {
     }
 
-    public Product(String name, Integer price, String color) {
+    public Product(String name, int price, String color) {
         this.name = name;
         this.price = price;
         this.color = color;

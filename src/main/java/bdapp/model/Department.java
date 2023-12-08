@@ -16,7 +16,7 @@ public class Department {
     private int id;
 
     @Column(name = "name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Название отдела должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+( )?[а-яё]+",message = "Название отдела должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
     @OneToMany(mappedBy = "department",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     private List<Staff> staffList;

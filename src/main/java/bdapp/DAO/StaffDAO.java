@@ -67,11 +67,12 @@ public class StaffDAO {
     }
 
 
-    public void updateStaff(Staff staff){
+    public void updateStaff(Staff newStaff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-       staff.setDepartment( (Department) session.createQuery("from Department where name='"+staff.getDepartment().getName() + "'").getResultList().get(0));
-       session.merge(staff);
+       newStaff.setDepartment( (Department) session.createQuery
+               ("from Department where name='"+newStaff.getDepartment().getName() + "'").getResultList().get(0));
+       session.merge(newStaff);
        session.getTransaction().commit();
 
     }
@@ -87,6 +88,8 @@ public class StaffDAO {
     public  void addStaff(Staff staff){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
+        staff.setDepartment( (Department) session.createQuery
+                ("from Department where name='"+staff.getDepartment().getName() + "'").getResultList().get(0));
         session.persist(staff);
         session.getTransaction().commit();
     }

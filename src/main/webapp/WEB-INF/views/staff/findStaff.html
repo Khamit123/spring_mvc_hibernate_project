@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Сотрудники</title>
 
     <style>
         /* Стили таблицы (IKSWEB) */
@@ -37,11 +37,6 @@
     <select  id="department" name="department.name">
         <option value="" >Все</option>
         <option th:each="a:${dep}" th:selected="${staff.department.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
-<!--        <option th:selected="*{department.name=='Бухгалтерия'}" value="Бухгалтерия">Бухгалтерия</option>-->
-<!--        <option th:selected="*{department.name=='Служба поддержки'}" value="Служба поддержки" >Служба поддержки</option>-->
-<!--        <option th:selected="*{department.name=='Отдел кадров'}" value="Отдел кадров">Отдел кадров</option>-->
-<!--        <option th:selected="*{department.name=='Отдел техобслуживания'}"value="Отдел техобслуживания">Отдел техобслуживания</option>-->
-<!--        <option th:selected="*{department.name=='Отдел ИТ'}" value="Отдел ИТ">Отдел ИТ</option>-->
 
 
     </select>
@@ -63,14 +58,14 @@
     <tr th:each="staff:${staffs}">
         <td><span th:text="${staff.getName}"> Имя </span></td>
         <td><span th:text="${staff.getLastName}"> Фамилия </span></td>
-        <td><span th:text="${staff.getMiddleName}"> Отчестов </span></td>
+        <td><span th:text="${staff.getMiddleName}"> Отчество </span></td>
         <td><span th:text="${staff.getSalary}"> Зарплата </span></td>
         <td><span th:text="${staff.getPhoneNumber}"> Номер телефона </span></td>
         <td><span th:text="${staff.getEmail}"> Почта </span></td>
         <td><span th:text="${staff.getPost}"> Должность </span></td>
         <td><span th:text="${staff.getBirthday}"> День рождения </span></td>
         <td><span th:text="${staff.GetisWorking}"> Статус </span></td>
-        <td><span th:text="${staff.getDateOfHire}"> Дата нанятия </span></td>
+        <td><span th:text="${staff.getDateOfHire}"> Дата найма </span></td>
         <td><span th:text="${staff.getDateOfSalary}">Дата изменения зарплаты</span></td>
         <td><span th:text="${staff.getDepartment().getName}"> Отдел </span></td>
 
