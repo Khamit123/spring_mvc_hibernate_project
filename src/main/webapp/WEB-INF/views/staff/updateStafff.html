@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Изменение сотрудника</title>
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
@@ -60,7 +60,7 @@
     </select>
     <br/>
     <label for="dateOfHire">Введите день найма</label>
-    <input type="date" th:field="*{dateOfHire}" id="dateOfHire">
+    <input type="date"  th:field="*{dateOfHire}" id="dateOfHire">
     <div style="color: red" th:if="${#fields.hasErrors('dateOfHire')}" th:errors="*{dateOfHire}"></div>
     <br/>
     <label for="dateOfSalary">Введите день повышения зарплаты</label>

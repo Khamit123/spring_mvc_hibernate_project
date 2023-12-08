@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Добавление сотрудника</title>
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
@@ -55,13 +55,9 @@
     </select>
 
 
-    <br/>  <label for="department.name">Отдел</label>
-    <select  id="department.name" name="department.name">
-        <option th:selected="*{department.name=='Бухгалтерия'}" value="Бухгалтерия">Бухгалтерия</option>
-        <option th:selected="*{department.name=='Служба поддержки'}" value="Служба поддержки" >Служба поддержки</option>
-        <option th:selected="*{department.name=='Отдел кадров'}" value="Отдел кадров">Отдел кадров</option>
-        <option th:selected="*{department.name=='Отдел техобслуживания'}" value="Отдел техобслуживания">Отдел техобслуживания</option>
-        <option th:selected="*{department.name=='Отдел ИТ'}" value="Отдел ИТ">Отдел ИТ</option>
+    <br/>  <label for="department">Отдел</label>
+    <select  name="department.name" id="department">
+        <option th:each="a:${dep}" th:selected="${staff.department.name==a.getName}"  th:value="${a.getName()}" th:text="${a.getName}">
     </select>
     <br/>
     <label for="dateOfHire">Введите день найма</label>

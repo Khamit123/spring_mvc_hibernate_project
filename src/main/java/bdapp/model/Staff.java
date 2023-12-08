@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+
 import java.util.Objects;
 
 @Entity
@@ -52,8 +52,10 @@ public class Staff {
     private String post;
 
     @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "birthday")
-    private Date birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public String birthday;
 
     @NotNull(message = "Не должно быть пустым")
     @Column(name ="isworking")
@@ -61,17 +63,21 @@ public class Staff {
     private boolean isWorking;
     @NotNull(message = "Не должно быть пустым")
     @Column(name = "date_of_hire")
-    private Date dateOfHire;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotEmpty(message = "Не должно быть пустым")
+    private String dateOfHire;
     @NotNull(message = "Не должно быть пустым")
     @Column(name = "date_of_slary")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateOfSalary;
+    @NotEmpty(message = "Не должно быть пустым")
+    private String dateOfSalary;
     @NotNull(message = "Не должно быть пустым")
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public Staff(String name, String lastName, String middleName, int salary, String phoneNumber, String email, String post, Date birthday, boolean isWorking, Date dateOfHire, Date dateOfSalary, Department department) {
+    public Staff(int id, String name, String lastName, String middleName, int salary, String phoneNumber, String email, String post, String birthday, boolean isWorking, String dateOfHire, String dateOfSalary, Department department) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -161,7 +167,7 @@ public class Staff {
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = Date.valueOf(birthday);
+        this.birthday = birthday;
     }
 
     public boolean isWorking() {
@@ -186,7 +192,7 @@ public class Staff {
     }
 
     public void setDateOfHire(String dateOfHire) {
-        this.dateOfHire = Date.valueOf(dateOfHire);
+        this.dateOfHire =dateOfHire;
     }
 
     public String getDateOfSalary() {
@@ -197,7 +203,7 @@ public class Staff {
     }
 
     public void setDateOfSalary(String dateOfSalary) {
-        this.dateOfSalary = Date.valueOf(dateOfSalary);
+        this.dateOfSalary = dateOfSalary;
     }
 
     public Department getDepartment() {

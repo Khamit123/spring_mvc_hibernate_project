@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@localhost">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.49">
-    <root id="1"/>
+    <root id="1">
+      <DefaultEngine>InnoDB</DefaultEngine>
+      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
+      <ServerVersion>8.0.32</ServerVersion>
+    </root>
     <schema id="2" parent="1" name="information_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
@@ -9,6 +13,8 @@
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="4" parent="1" name="pen_factory">
+      <IntrospectionTimestamp>2023-12-08.21:33:06</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-08.15:33:06</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="5" parent="1" name="performance_schema">
@@ -328,7 +334,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="76" parent="21" name="department_id">
-      <AutoIncrement>24</AutoIncrement>
+      <AutoIncrement>44</AutoIncrement>
       <DasType>tinyint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -348,7 +354,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="80" parent="22" name="factory_id">
-      <AutoIncrement>2</AutoIncrement>
+      <AutoIncrement>3</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1029,7 +1035,7 @@ product_id</ColNames>
       <Predicate>length(`phone_number`) = 11</Predicate>
     </check>
     <column id="223" parent="37" name="staff_id">
-      <AutoIncrement>12</AutoIncrement>
+      <AutoIncrement>14</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>

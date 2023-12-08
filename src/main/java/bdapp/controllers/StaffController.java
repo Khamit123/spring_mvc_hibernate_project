@@ -59,14 +59,19 @@ public class StaffController {
     }
 
     @GetMapping("/addStaff")
-    public String addStaffGet(@ModelAttribute("staff") Staff staff){
-
+    public String addStaffGet(@ModelAttribute("staff") Staff staff,Model model){
+        model.addAttribute("dep",departmentDAO.allDep());
         return "/staff/addStaff";
     }
 
     @PostMapping("/addStaff")
-    public String addStaff(@ModelAttribute("staff") @Valid Staff staff,BindingResult bindingResult){
-       if(bindingResult.hasErrors()) return "staff/addStaff";
+    public String addStaff(@ModelAttribute("staff") @Valid Staff staff,BindingResult bindingResult,Model model){
+       if(bindingResult.hasErrors()) {
+           System.out.println(staff.birthday);
+           System.out.println(bindingResult.getAllErrors().get(0));
+           model.addAttribute("dep",departmentDAO.allDep());
+           return "staff/addStaff";
+       }
         staffDAO.addStaff(staff);
         return "redirect:/staff/findingStaffs";
     }

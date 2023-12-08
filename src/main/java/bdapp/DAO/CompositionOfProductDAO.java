@@ -1,11 +1,10 @@
 package bdapp.DAO;
 
-import bdapp.model.CompositionOfProduct;
-import bdapp.model.Material;
-import bdapp.model.Product;
+import bdapp.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.List;
 @Component
 public class CompositionOfProductDAO {
     private List<String> names = new ArrayList<>(List.of("Название продукта","Цвет","Название материала","Количество материала"));
-
     public List<String> getNames() {
         return names;
     }
@@ -58,5 +56,7 @@ public class CompositionOfProductDAO {
         }
         return null;
     }
+
+
 
 }
