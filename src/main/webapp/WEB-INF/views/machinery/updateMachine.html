@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+
+<form style="" th:method="PATCH" th:action="@{/machine/updateMachine/{id} (id=${mac.getMachineId})}" th:object="${mac}">
+    <br/><label for="name">Введите имя</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+
+    <br/><label for="machineTypeId">Выберите тип</label>
+    <select  id="machineTypeId" name="machineTypeId.name">
+        <option th:each="a:${types}" th:selected="${mac.machineTypeId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
+
+    </select>
+
+    <br/><label for="machineStatusId">Выберите статус</label>
+    <select  id="machineStatusId" name="machineStatusId.name">
+        <option th:each="a:${statuses}" th:selected="${mac.machineStatusId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
+
+    </select>
+    <br/><label for="maintenance">Выберите номер техобслуживания</label>
+    <select  id="maintenance" name="maintenance.maintenanceId">
+        <option th:each="a:${mains}" th:selected="${mac.maintenanceId.maintenanceId==a.getMaintenanceId}" th:value="${a.getMaintenanceId}" th:text="${a.getMaintenanceId}">
+
+    </select>
+
+    <label for="factoryId">Выберите завод</label>
+    <br/><select  id="factoryId" name="factoryId.name">
+    <option th:each="a:${factories}" th:selected="${mac.factoryId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
+
+</select>
+    <input type="submit" value="Изменить">
+
+</form>
+</body>
+</html>

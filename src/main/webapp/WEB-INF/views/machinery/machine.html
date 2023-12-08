@@ -18,27 +18,31 @@
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
-<form style="" th:method="GET" th:action="@{/machine/findMachine}" th:object="${mac}">
+<form th:method="GET" th:action="@{/machine/findMachine}" th:object="${mac}">
   <label for="name">Введите название</label>
   <input type="text" th:field="*{name}" id="name">
 
 
-  <label for="machineTypeId">Введите тип</label>
-  <input type="text" th:field="*{machineTypeId}" id="machineTypeId">
+  <label for="machineTypeId">Выберите тип</label>
+  <select  id="machineTypeId" name="machineTypeId.name">
+    <option value="" >Все</option>
+    <option th:each="a:${types}" th:selected="${mac.machineTypeId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
-  <label for="machineStatusId">Введите статус</label>
-  <input type="text" th:field="*{machineStatusId}" id="machineStatusId">
+  </select>
 
-  <label for="factoryId">Введите завод</label>
-  <input type="text" th:field="*{factoryId}" id="factoryId">
+  <label for="machineStatusId">Выберите статус</label>
+  <select  id="machineStatusId" name="machineStatusId.name">
+    <option value="" >Все</option>
+    <option th:each="a:${statuses}" th:selected="${mac.machineStatusId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
+  </select>
 
-<!--  <label for="department">Отдел</label>-->
-<!--  <select  id="department" name="department.name">-->
-<!--    <option value="" >Все</option>-->
-<!--    <option th:each="a:${dep}" th:selected="${staff.department.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">-->
+  <label for="factoryId">Выберите завод</label>
+  <select  id="factoryId" name="factoryId.name">
+    <option value="" >Все</option>
+    <option th:each="a:${factories}" th:selected="${mac.factoryId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
-<!--  </select>-->
+  </select>
   <br/>
   <input type="submit" value="Поиск">
 
@@ -56,21 +60,21 @@
 
   <tr th:each="mach:${macs}">
     <td><span th:text="${mach.getName}"> Название </span></td>
-    <td><span th:text="${mach.getMachineTypeId}"> Тип </span></td>
-    <td><span th:text="${mach.getMachineStatusId}"> Статус </span></td>
-    <td><span th:text="${mach.getFactoryId}"> Завод </span></td>
-    <td><span th:text="${mach.getMaintenanceId}"> Техобслуживание </span></td>
+    <td><span th:text="${mach.getMachineTypeId.getName}"> Тип </span></td>
+    <td><span th:text="${mach.getMachineStatusId.getName}"> Статус </span></td>
+    <td><span th:text="${mach.getFactoryId.getName}"> Завод </span></td>
+    <td><span th:text="${mach.getMaintenanceId.getMaintenanceId}">Техобслуживание </span></td>
 
-    <td><form th:method="GET" th:action="@{/staff/updateStaff} ">
+    <td><form th:method="GET" th:action="@{/machine/updateMachine/{id} (id=${mach.getMachineId})} ">
       <button>Изменить</button>
     </form></td>
-    <td><form th:method="DELETE" th:action="@{/staff/deleteStaff} ">
+    <td><form th:method="DELETE" th:action="@{/machine/deleteMachine/{id} (id=${mach.getMachineId)}} ">
       <button>Удалить</button>
     </form></td>
   </tr>
   </tbody>
 </table>
-<form th:method="GET" th:action="@{/staff/addStaff}">
+<form th:method="GET" th:action="@{/machine/addMachine}">
   <input type="submit" value="Добавить нового сотрудника">
 </form>
 </body>

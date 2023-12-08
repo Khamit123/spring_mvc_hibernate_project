@@ -21,7 +21,6 @@ public class DepartmentDAO {
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
         List deps= session.createQuery("from Department").getResultList();
-        System.out.println(deps);
         session.getTransaction().commit();
         return deps;
     }

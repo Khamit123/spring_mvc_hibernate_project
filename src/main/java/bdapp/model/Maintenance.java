@@ -1,6 +1,7 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.sql.Date;
@@ -13,14 +14,15 @@ public class Maintenance {
     @Id
     @Column(name = "maintenance_id", nullable = false)
     private int maintenanceId;
-    @Basic
+    @NotEmpty
     @Column(name = "date_of_maintenance", nullable = false)
-    private Date dateOfMaintenance;
+    private String dateOfMaintenance;
     @NotNull
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "staff_id")
     private Staff staffId;
     @NotNull
+    @NotEmpty
     @Column(name = "what_done", nullable = true, length = -1)
     private String whatDone;
     @OneToMany(mappedBy = "maintenanceId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
@@ -42,7 +44,7 @@ public class Maintenance {
     }
 
     public void setDateOfMaintenance(String dateOfMaintenance) {
-        this.dateOfMaintenance = Date.valueOf(dateOfMaintenance);
+        this.dateOfMaintenance = dateOfMaintenance;
     }
 
 

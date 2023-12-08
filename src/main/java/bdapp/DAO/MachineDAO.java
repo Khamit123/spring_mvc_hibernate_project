@@ -13,7 +13,6 @@ import java.util.List;
 public class MachineDAO {
     private List<String> names=new ArrayList<>(List.of("Название ","Тип","Статус ","Завод ","Техобслуживание "));
 
-
     private SessionFactory sessionFactory =new Configuration()
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(Machinery.class).addAnnotatedClass(MachineStatus.class)
@@ -27,7 +26,7 @@ public class MachineDAO {
         String name=machinery.getName();
         String factory=machinery.getFactoryId().getName();
         String status=machinery.getMachineStatusId().getName();
-        String type=machinery.getMachineTypeId();
+        String type=machinery.getMachineTypeId().getName();
         System.out.println(name+"\n"+status+"\n"+factory+"\n"+type);
         if(name==null || name==""){
             name="'%'";
@@ -57,38 +56,76 @@ public class MachineDAO {
         return s;
     }
 
-    public Staff getOneStaff(int id){
+    public Machinery getOneMachine(int id){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Staff staff1= session.get(Staff.class,id);
+        Machinery machinery= session.get(Machinery.class,id);
         session.getTransaction().commit();
-        return staff1;
+        return machinery;
     }
 
 
-    public void updateStaff(Staff staff){
+    public void updateMachine(Machinery machinery){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        staff.setDepartment( (Department) session.createQuery("from Department where name='"+staff.getDepartment().getName() + "'").getResultList().get(0));
-        session.merge(staff);
+        machinery.setFactoryId((Factory) session.createQuery
+                ("from Factory where name ='"+ machinery.getFactoryId().getName()+"'")
+                .getResultList().get(0));
+        machinery.setMachineStatusId((MachineStatus) session.createQuery
+                ("from MachineStatus where name ='"+machinery.getMachineStatusId().getName()+"'")
+                .getResultList().get(0));
+        machinery.setMachineTypeId((MachineType) session.createQuery
+                ("from MachineType where name ='"+machinery.getMachineTypeId().getName()+"'")
+                .getResultList().get(0));
+        machinery.setMaintenanceId(session.get(Maintenance.class,machinery.getMaintenanceId().getMaintenanceId()));
+        session.merge(machinery);
         session.getTransaction().commit();
 
     }
-    public void deleteStaff(Staff staff){
+    public void deleteMachine(Machinery machinery){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Staff staff1= session.get(Staff.class,staff.getId());
-        session.delete(staff1);
+        Machinery machinery1= session.get(Machinery.class,machinery.getMachineId());
+        session.delete(machinery1);
 
         session.getTransaction().commit();
 
     }
-    public  void addStaff(Staff staff){
+    public  void addMachine(Machinery machinery){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        session.persist(staff);
+        session.persist(machinery);
         session.getTransaction().commit();
     }
+    public List<MachineStatus> getStatus(){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List macs= session.createQuery("from MachineStatus").getResultList();
+        session.getTransaction().commit();
+        return macs;
+    }
+    public List<MachineType> getType(){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List macs= session.createQuery("from MachineType").getResultList();
+        session.getTransaction().commit();
+        return macs;
+    }
+    public List<Factory> getFactory(){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List macs= session.createQuery("from Factory").getResultList();
+        session.getTransaction().commit();
+        return macs;
+    }
+    public List<Maintenance> getMain(){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List macs= session.createQuery("from Maintenance").getResultList();
+        session.getTransaction().commit();
+        return macs;
+    }
+
 
 
     public List<String> getNames() {

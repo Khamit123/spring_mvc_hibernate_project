@@ -1,7 +1,9 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
 
@@ -31,6 +33,8 @@ public class Machinery {
     @JoinColumn(name = "factory_id")
     private Factory factoryId;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "name", nullable = true, length = 30)
     private String name;
 
@@ -47,6 +51,15 @@ public class Machinery {
         this.machineStatusId = new MachineStatus();
     }
 
+    public Machinery(int machineId, MachineType machineTypeId, Maintenance maintenanceId, Factory factoryId, String name, MachineStatus machineStatusId) {
+        this.machineId = machineId;
+        this.machineTypeId = machineTypeId;
+        this.maintenanceId = maintenanceId;
+        this.factoryId = factoryId;
+        this.name = name;
+        this.machineStatusId = machineStatusId;
+    }
+
     public int getMachineId() {
         return machineId;
     }
@@ -55,12 +68,12 @@ public class Machinery {
         this.machineId = machineId;
     }
 
-    public String getMachineTypeId() {
-        return machineTypeId.getName();
+    public MachineType getMachineTypeId() {
+        return machineTypeId;
     }
 
-    public void setMachineTypeId(String machineTypeId) {
-        this.machineTypeId.setName(machineTypeId);
+    public void setMachineTypeId(MachineType machineTypeId) {
+        this.machineTypeId = machineTypeId;
     }
 
     public Maintenance getMaintenanceId() {

@@ -1,6 +1,7 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
@@ -12,9 +13,11 @@ public class MachineStatus {
     @Column(name = "machine_status_id", nullable = false)
     private int machineStatusId;
 
+    @NotEmpty
     @Column(name = "name", nullable = true, length = 30)
     private String name;
 
+    @NotEmpty
     @Column(name = "description", nullable = true, length = -1)
     private String description;
     @OneToMany(mappedBy = "machineStatusId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)

@@ -1,6 +1,7 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
@@ -14,9 +15,11 @@ public class Factory {
     @Column(name = "factory_id", nullable = false)
     private int factoryId;
 
+    @NotEmpty
     @Column(name = "adress", nullable = true, length = 30)
     private String adress;
 
+    @NotEmpty
     @Column(name = "name", nullable = true, length = 30)
     private String name;
 
