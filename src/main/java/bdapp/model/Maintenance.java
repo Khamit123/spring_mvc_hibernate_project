@@ -25,7 +25,7 @@ public class Maintenance {
     @NotEmpty
     @Column(name = "what_done", nullable = true, length = -1)
     private String whatDone;
-    @OneToMany(mappedBy = "maintenanceId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "maintenance",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     List<Machinery> machineryList;
     public int getMaintenanceId() {
         return maintenanceId;

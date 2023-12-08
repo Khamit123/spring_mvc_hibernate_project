@@ -77,7 +77,8 @@ public class MachineDAO {
         machinery.setMachineTypeId((MachineType) session.createQuery
                 ("from MachineType where name ='"+machinery.getMachineTypeId().getName()+"'")
                 .getResultList().get(0));
-        machinery.setMaintenanceId(session.get(Maintenance.class,machinery.getMaintenanceId().getMaintenanceId()));
+        System.out.println(machinery.getName());
+        machinery.setMaintenance(session.get(Maintenance.class,machinery.getMaintenance().getMaintenanceId()));
         session.merge(machinery);
         session.getTransaction().commit();
 

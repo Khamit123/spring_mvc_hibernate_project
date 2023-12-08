@@ -3,12 +3,11 @@ package bdapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "machinery", schema = "pen_factory", catalog = "")
+@Table(name = "machinery", schema = "pen_factory")
 public class Machinery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -25,7 +24,7 @@ public class Machinery {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
             CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "maintenance_id")
-    private Maintenance maintenanceId;
+    private Maintenance maintenance;
 
     @NotNull
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
@@ -46,15 +45,15 @@ public class Machinery {
 
     public Machinery() {
         this.machineTypeId = new MachineType();
-        this.maintenanceId = new Maintenance();
+        this.maintenance = new Maintenance();
         this.factoryId = new Factory();
         this.machineStatusId = new MachineStatus();
     }
 
-    public Machinery(int machineId, MachineType machineTypeId, Maintenance maintenanceId, Factory factoryId, String name, MachineStatus machineStatusId) {
+    public Machinery(int machineId, MachineType machineTypeId, Maintenance maintenance, Factory factoryId, String name, MachineStatus machineStatusId) {
         this.machineId = machineId;
         this.machineTypeId = machineTypeId;
-        this.maintenanceId = maintenanceId;
+        this.maintenance = maintenance;
         this.factoryId = factoryId;
         this.name = name;
         this.machineStatusId = machineStatusId;
@@ -76,12 +75,12 @@ public class Machinery {
         this.machineTypeId = machineTypeId;
     }
 
-    public Maintenance getMaintenanceId() {
-        return maintenanceId;
+    public Maintenance getMaintenance() {
+        return maintenance;
     }
 
-    public void setMaintenanceId(Maintenance maintenanceId) {
-        this.maintenanceId = maintenanceId;
+    public void setMaintenance(Maintenance maintenance) {
+        this.maintenance = maintenance;
     }
 
     public Factory getFactoryId() {
@@ -113,11 +112,11 @@ public class Machinery {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Machinery machinery = (Machinery) o;
-        return machineId == machinery.machineId && machineTypeId.equals(machinery.machineTypeId) && maintenanceId.equals(machinery.maintenanceId) && factoryId.equals(machinery.factoryId) && name.equals(machinery.name) && machineStatusId.equals(machinery.machineStatusId);
+        return machineId == machinery.machineId && machineTypeId.equals(machinery.machineTypeId) && maintenance.equals(machinery.maintenance) && factoryId.equals(machinery.factoryId) && name.equals(machinery.name) && machineStatusId.equals(machinery.machineStatusId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(machineId, machineTypeId, maintenanceId, factoryId, name, machineStatusId);
+        return Objects.hash(machineId, machineTypeId, maintenance, factoryId, name, machineStatusId);
     }
 }

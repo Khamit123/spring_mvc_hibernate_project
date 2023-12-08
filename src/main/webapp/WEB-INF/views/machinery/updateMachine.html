@@ -24,9 +24,9 @@
         <option th:each="a:${statuses}" th:selected="${mac.machineStatusId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
     </select>
-    <br/><label for="maintenance">Выберите номер техобслуживания</label>
-    <select  id="maintenance" name="maintenance.maintenanceId">
-        <option th:each="a:${mains}" th:selected="${mac.maintenanceId.maintenanceId==a.getMaintenanceId}" th:value="${a.getMaintenanceId}" th:text="${a.getMaintenanceId}">
+    <br/><label for="maintenance.maintenanceId">Выберите номер техобслуживания</label>
+    <select  id="maintenance.maintenanceId" name="maintenance.maintenanceId">
+        <option th:each="a:${mains}" th:selected="${mac.maintenance.maintenanceId==a.getMaintenanceId}" th:value="${a.getMaintenanceId()}" th:text="${a.getMaintenanceId}">
 
     </select>
 

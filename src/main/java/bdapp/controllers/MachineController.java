@@ -30,9 +30,11 @@ public class MachineController {
         return "machinery/machine";
     }
 
-    @GetMapping("/updateMachine/{id}")
-    public String updateMachineGet(@PathVariable("id") int id, Model model){
+    @GetMapping("/updateMachine/{machineId}")
+    public String updateMachineGet(@PathVariable("machineId") int id, Model model){
         Machinery machinery=machineDAO.getOneMachine(id);
+        System.out.println("Machine control "+ machinery.getMachineId());
+        System.out.println();
         model.addAttribute("mac",machinery);
         model.addAttribute("names",machineDAO.getNames());
         model.addAttribute("types",machineDAO.getType());
@@ -42,8 +44,10 @@ public class MachineController {
         return "machinery/updateMachine";
 
     }
-    @PatchMapping("/updateMachine/{id}")
-    public String updateMachine (@PathVariable("id") int id,@ModelAttribute("mac")@Valid Machinery machinery,BindingResult bindingResult,Model model){
+    @PatchMapping("/updateMachine/{machineId}")
+    public String updateMachine (@PathVariable("machineId") int id,@ModelAttribute("mac")@Valid Machinery machinery,BindingResult bindingResult,Model model){
+        System.out.println("Machine control  patch "+ machinery.getMachineId());
+        System.out.println();
         if(bindingResult.hasErrors()) {
             model.addAttribute("names",machineDAO.getNames());
             model.addAttribute("types",machineDAO.getType());
@@ -57,8 +61,8 @@ public class MachineController {
 
     }
 
-    @DeleteMapping("/deleteMachine/{id}")
-    public String deleteMachine(@ModelAttribute("mac") Machinery machinery,@PathVariable int id,Model model){
+    @DeleteMapping("/deleteMachine/{machineId}")
+    public String deleteMachine(@ModelAttribute("mac") Machinery machinery,@PathVariable("machineId") int id,Model model){
         try{
             machineDAO.deleteMachine(machinery);
         }catch (Exception e){
