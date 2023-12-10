@@ -21,7 +21,7 @@
   <input type="date" th:field="*{dateOfMaintenance}" id="date">
 
   <br><label for="staffId.name">Введите имя сотрудника</label>
-  <input type="text" name="*{staffId.name}" id="staffId.name">
+  <input type="text" name="staffId.name" id="staffId.name">
   <br/>
   <input type="submit" value="Поиск">
 
@@ -39,7 +39,7 @@
 
   <tr th:each="m:${mains}">
     <td><span th:text="${m.getMaintenanceId}"> ID </span></td>
-    <td><span th:text="${m.getDateOfMaintenance}"> Тип </span></td>
+    <td><span th:text="${m.getDateOfMaintenance}"> Дата </span></td>
     <td><a th:href="@{/staff/findStaff(id=${m.getStaffId.getId})}" th:text="${m.getStaffId.getName}"> Сотрудник </a></td>
     <td><span th:text="${m.getWhatDone}"> Что сделано </span></td>
 
