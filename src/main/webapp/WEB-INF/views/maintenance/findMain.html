@@ -40,7 +40,7 @@
   <tr th:each="m:${mains}">
     <td><span th:text="${m.getMaintenanceId}"> ID </span></td>
     <td><span th:text="${m.getDateOfMaintenance}"> Дата </span></td>
-    <td><a th:href="@{/staff/findStaff(id=${m.getStaffId.getId})}" th:text="${m.getStaffId.getName}"> Сотрудник </a></td>
+    <td><a th:href="@{/staff/findingStaff(id=${m.getStaffId.getId})}" th:text="${m.getStaffId.getName}"> Сотрудник </a></td>
     <td><span th:text="${m.getWhatDone}"> Что сделано </span></td>
 
     <td><form th:method="GET" th:action="@{/maintenance/updateMaintenance/{id} (id=${m.getMaintenanceId})} ">
