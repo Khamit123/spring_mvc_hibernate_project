@@ -13,15 +13,14 @@ public class Maintenance {
     @Id
     @Column(name = "maintenance_id", nullable = false)
     private int maintenanceId;
-    @NotEmpty
     @Column(name = "date_of_maintenance", nullable = false)
+    @NotEmpty(message = "Не должно быть пустым")
     private String dateOfMaintenance;
-    @NotNull
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},fetch = FetchType.EAGER)
     @JoinColumn(name = "staff_id")
     private Staff staffId;
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "what_done", nullable = true, length = -1)
     private String whatDone;
     @OneToMany(mappedBy = "maintenance",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)

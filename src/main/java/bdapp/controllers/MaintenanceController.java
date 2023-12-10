@@ -24,6 +24,7 @@ public class MaintenanceController {
     public String findMaintenance(Model model, @ModelAttribute("main")Maintenance maintenance){
         model.addAttribute("mains",maintenanceDAO.getFindMaintenance(maintenance));
         model.addAttribute("names",maintenanceDAO.getNames());
+        model.addAttribute("staffs",maintenanceDAO.getStaffs());
         return "maintenance/findMain";
     }
 
@@ -31,12 +32,16 @@ public class MaintenanceController {
     public String updateMaintenanceGet(@PathVariable("maintenanceId") int id, Model model){
         Maintenance maintenance=maintenanceDAO.getOneMaintenance(id);
         model.addAttribute("main",maintenance);
+        model.addAttribute("staffs",maintenanceDAO.getStaffs());
         return "maintenance/updateMain";
 
     }
     @PatchMapping("/updateMaintenance/{maintenanceId}")
-    public String updateMaintenance(@PathVariable("maintenanceId") int id,@ModelAttribute("main")@Valid Maintenance maintenance,BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return "maintenance/updateMain";
+    public String updateMaintenance(@PathVariable("maintenanceId") int id,@ModelAttribute("main")@Valid Maintenance maintenance,BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("staffs",maintenanceDAO.getStaffs());
+            return "maintenance/updateMain";
+        }
         maintenanceDAO.updateMaintenance(maintenance);
         return "redirect:/maintenance/findMaintenance";
 
@@ -48,21 +53,25 @@ public class MaintenanceController {
             maintenanceDAO.deleteMaintenance(maintenance);
         }catch (Exception e){
             model.addAttribute("msg", List.of("Для удаления Техобслуживания:"," 1.Необходимо убрать из этого отдела  всех сотрудников"));
-            return "maintenance/findMain";
+            return "staff/error";
         }
 
         return "redirect:/maintenance/findMaintenance";
     }
 
-    @GetMapping("/addMaintenancet")
-    public String addMaintenanceGet(@ModelAttribute("main") Maintenance maintenance){
-
+    @GetMapping("/addMaintenance")
+    public String addMaintenanceGet(@ModelAttribute("main") Maintenance maintenance,Model model){
+        model.addAttribute("staffs",maintenanceDAO.getStaffs());
         return "maintenance/addMain";
     }
 
     @PostMapping("/addMaintenance")
-    public String addMaintenance(@ModelAttribute("main") @Valid Maintenance maintenance,BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return "maintenance/addMain";
+    public String addMaintenance(@ModelAttribute("main") @Valid Maintenance maintenance,BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("staffs",maintenanceDAO.getStaffs());
+
+            return "maintenance/addMain";
+        }
         maintenanceDAO.addMaintenance(maintenance);
         return "redirect:/maintenance/findMaintenance";
     }

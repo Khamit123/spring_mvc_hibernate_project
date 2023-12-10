@@ -9,13 +9,17 @@
 <form style="" th:method="PATCH" th:action="@{/maintenance/updateMaintenance/{id} (id=${main.getMaintenanceId})}" th:object="${main}">
     <label for="date">Выберите дату</label>
     <input type="date" th:field="*{dateOfMaintenance}" id="date">
+    <div style="color: red" th:if="${#fields.hasErrors('dateOfMaintenance')}" th:errors="*{dateOfMaintenance}"></div>
 
-    <br><label for="staffId.name">Введите имя сотрудника</label>
-    <input type="text" name="staffId.name" id="staffId.name">
-
+    <br/>  <label for="staff">Выберите имя сотрудника</label>
+    <select  th:field="*{staffId.id}" id="staff">
+        <option th:each="a:${staffs}" th:selected="${main.staffId.id==a.getId}"  th:value="${a.getId}" th:text="${a.FullName}">
+    </select>
     <label for="wh">Введите что сделано</label>
     <input type="text" th:field="*{whatDone}" id="wh">
-    <input type="submit" value="Добавить">
+    <div style="color: red" th:if="${#fields.hasErrors('whatDone')}" th:errors="*{whatDone}"></div>
+
+    <input type="submit" value="Изменить">
 
 </form>
 </body>

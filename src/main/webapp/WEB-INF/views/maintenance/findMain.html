@@ -20,8 +20,11 @@
   <label for="date">Выберите дату</label>
   <input type="date" th:field="*{dateOfMaintenance}" id="date">
 
-  <br><label for="staffId.name">Введите имя сотрудника</label>
-  <input type="text" name="staffId.name" id="staffId.name">
+  <br/>  <label for="staff">Выберите имя сотрудника</label>
+  <select  th:field="*{staffId.id}" id="staff">
+    <option value="-1">Все</option>
+    <option th:each="a:${staffs}" th:selected="${main.staffId.id==a.getId}"  th:value="${a.getId}" th:text="${a.FullName}">
+  </select>
   <br/>
   <input type="submit" value="Поиск">
 
@@ -40,7 +43,7 @@
   <tr th:each="m:${mains}">
     <td><span th:text="${m.getMaintenanceId}"> ID </span></td>
     <td><span th:text="${m.getDateOfMaintenance}"> Дата </span></td>
-    <td><a th:href="@{/staff/findingStaff(id=${m.getStaffId.getId})}" th:text="${m.getStaffId.getName}"> Сотрудник </a></td>
+    <td><a th:href="@{/staff/findingStaffs(id=${m.getStaffId.getId})}" th:text="${m.getStaffId.FullName}"> Сотрудник </a></td>
     <td><span th:text="${m.getWhatDone}"> Что сделано </span></td>
 
     <td><form th:method="GET" th:action="@{/maintenance/updateMaintenance/{id} (id=${m.getMaintenanceId})} ">

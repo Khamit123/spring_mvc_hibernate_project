@@ -25,17 +25,22 @@ public class MaintenanceDAO {
     public List<Maintenance> getFindMaintenance(Maintenance main){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String name= main.getStaffId().getName();
+        if(main.getMaintenanceId()!=0){
+            List s=List.of( session.get(Maintenance.class,main.getMaintenanceId()));
+            session.getTransaction().commit();
+            return s;
+        }
+        String id;
+        if(main.getStaffId().getId()==-1 || main.getStaffId().getId()==0){
+            id="1=1";
+        }
+        else id="staffId.id="+main.getStaffId().getId();
         String date =main.getDateOfMaintenance();
-        if(name==null || name==""){
-            name="'%'";
-        }
-        else name="'"+name+"%'";
         if(date==null || date==""){
-            date="'%'";
+            date="1=1";
         }
-        else date="'%"+date+"%'";
-        Query query= session.createQuery("from Maintenance where  staffId.name like "+name+"and dateOfMaintenance like"+date);
+        else date="dateOfMaintenance>='"+date+"'";
+        Query query= session.createQuery("from Maintenance where "+ id+" and "+date);
         List s =query.getResultList();
 
         session.getTransaction().commit();
@@ -49,6 +54,13 @@ public class MaintenanceDAO {
         Maintenance main= session.get(Maintenance.class,id);
         session.getTransaction().commit();
         return main;
+    }
+    public List<Staff> getStaffs(){
+        Session session =sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List s=session.createQuery("from Staff").getResultList();
+        session.getTransaction().commit();
+        return s;
     }
 
 

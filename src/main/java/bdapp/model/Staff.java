@@ -6,6 +6,7 @@ import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -75,6 +76,9 @@ public class Staff {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
+    public String FullName(){
+        return lastName+" "+name+" "+middleName;
+    }
 
     public Staff(int id, String name, String lastName, String middleName, int salary, String phoneNumber, String email, String post, String birthday, boolean isWorking, String dateOfHire, String dateOfSalary, Department department) {
         this.id = id;

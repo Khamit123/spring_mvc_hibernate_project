@@ -60,7 +60,7 @@
     <td><span th:text="${mach.getMachineTypeId.getName}"> Тип </span></td>
     <td><span th:text="${mach.getMachineStatusId.getName}"> Статус </span></td>
     <td><span th:text="${mach.getFactoryId.getName}"> Завод </span></td>
-    <td><a th:href="@{/maintenance/findMaintenance(id=${mach.maintenance.getMaintenanceId}) }" th:text="${mach.maintenance.getMaintenanceId}">Номер техобслуживание </a></td>
+    <td><a th:href="@{/maintenance/findMaintenance(maintenanceId=${mach.maintenance.getMaintenanceId}) }" th:text="${mach.maintenance.getMaintenanceId}">Номер техобслуживание </a></td>
 
     <td><form th:method="GET" th:action="@{/machine/updateMachine/{id} (id=${mach.getMachineId})} ">
       <button>Изменить</button>

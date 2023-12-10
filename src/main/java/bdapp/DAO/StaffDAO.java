@@ -26,7 +26,9 @@ public class StaffDAO {
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
         if(staff.getId()!=0){
-           return List.of( session.get(Staff.class,staff.getId()));
+            List s=List.of( session.get(Staff.class,staff.getId()));
+            session.getTransaction().commit();
+           return s;
         }
         String name=staff.getName();
         String lastName=staff.getLastName();
