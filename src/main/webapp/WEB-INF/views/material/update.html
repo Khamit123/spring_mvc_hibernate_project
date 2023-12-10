@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение материала</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/material/add}" th:object="${material}">
+    <label for="name">Введите название продукта</label>
+    <label for="name">Введите название</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <br/>
+    <label for="unitsOfMeasurement">Выберите единицы измерения</label>
+    <select  id="unitsOfMeasurement" name="unitsOfMeasurement">
+        <option value="" >Любой</option>
+        <option th:each="unit:${units}" th:selected="${material.getUnitsOfMeasurement()==unit}" th:value="${unit}" th:text="${unit}">
+    </select>
+
+    <label for="price">Введите цену</label>
+    <br/>
+    <input type="number" th:field="*{price}" id="price">
+    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+    <br/>
+    <input type="submit" value="Поиск">
+
+</form>
+</body>
+</html>

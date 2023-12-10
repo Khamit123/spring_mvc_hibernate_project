@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductDAO {
     private SessionFactory sessionFactory =new Configuration()
             .configure("hibernate.cfg.xml")
-            .addAnnotatedClass(Product.class).addAnnotatedClass(CompositionOfProduct.class).addAnnotatedClass(Material.class)
+            .addAnnotatedClass(Product.class)
             .buildSessionFactory();
     private List<String> names = new ArrayList<>(List.of("Название продукта","Цвет","Цена"));
     private List<String> colors = new ArrayList<>(List.of("Красный","Зелёный","Синий","Белый"));
@@ -51,15 +51,26 @@ public class ProductDAO {
 
         return s;
     }
+    public Product getProduct(int id){
 
-    public void updateProduct(Product newProduct){
+        Session session=sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Product product= session.get(Product.class,id);
+        session.getTransaction().commit();
+        return product;
+    }
+
+    public void updateProduct(Product newProduct,int id){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
+        Product product=session.get(Product.class,id);
+        newProduct.setProductId(product.getProductId());
+        System.out.println(newProduct.getPrice() + "DAO update");
         session.merge(newProduct);
         session.getTransaction().commit();
 
     }
-    public void deleteStaff(Product product){
+    public void deleteProduct(Product product){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
         Product product1= session.get(Product.class,product.getProductId());
@@ -67,13 +78,27 @@ public class ProductDAO {
         session.getTransaction().commit();
 
     }
-    public  void addStaff(Product product){
+    public  void addProduct(Product product){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         session.persist(product);
         session.getTransaction().commit();
     }
-
+    public String colorConv(String col){
+        if(col.equals("b")){
+            return "Синий";
+        }
+        if(col.equals("r")){
+            return "Красный";
+        }
+        if(col.equals("g")){
+            return "Зелёный";
+        }
+        if(col.equals("w")){
+            return "Белый";
+        }
+        return null;
+    }
 
     public List<String> getNames() {
         return names;

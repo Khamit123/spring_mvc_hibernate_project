@@ -22,56 +22,58 @@ public class ProductController {
 
 
     @GetMapping("/findingProducts")
-    public String findingStaffs(Model model, @ModelAttribute("product")Product product){
+    public String findingStaffs(Model model, @ModelAttribute("product") Product product){
         model.addAttribute("names",productDAO.getNames());
         model.addAttribute("products",productDAO.getFindProduct(product));
-        model.addAttribute("colores",productDAO.getColors());
+        model.addAttribute("colors",productDAO.getColors());
         return "Product/findProduct";
     }
 
-//    @GetMapping("/updateStaff/{id}")
-//    public String updateStaffGet(@PathVariable("id") int id, Model model){
-//        Staff staff=staffDAO.getOneStaff(id);
-//        model.addAttribute("staff",staff);
-//        model.addAttribute("dep",departmentDAO.allDep());
-//        return "staff/updateStafff";
-//
-//    }
-//    @PatchMapping("/updateStaff/{id}")
-//    public String updateStaff(@PathVariable("id") int id,@ModelAttribute("staff")@Valid Staff staff,BindingResult bindingResult){
-//        if(bindingResult.hasErrors()) return "staff/updateStafff";
-//        staffDAO.updateStaff(staff);
-//        return "redirect:/staff/findingStaffs";
-//
-//    }
-//
-//    @DeleteMapping("/deleteStaff/{id}")
-//    public String deleteStaff(@ModelAttribute("staff") Staff staff,@PathVariable int id,Model model){
-//        try{
-//            staffDAO.deleteStaff(staff);
-//        }catch (Exception e){
-//            model.addAttribute("msg", List.of("Для удаления этого сотрудника необходимо:"," 1.Удалить его из таблицы Техобслуживние", " 2.Удалить его из таблицы Заводы"));
-//            return "/staff/error";
-//        }
-//
-//        return "redirect:/staff/findingStaffs";
-//    }
-//
-//    @GetMapping("/addStaff")
-//    public String addStaffGet(@ModelAttribute("staff") Staff staff,Model model){
-//        model.addAttribute("dep",departmentDAO.allDep());
-//        return "/staff/addStaff";
-//    }
-//
-//    @PostMapping("/addStaff")
-//    public String addStaff(@ModelAttribute("staff") @Valid Staff staff,BindingResult bindingResult,Model model){
-//        if(bindingResult.hasErrors()) {
-//            System.out.println(staff.birthday);
-//            System.out.println(bindingResult.getAllErrors().get(0));
-//            model.addAttribute("dep",departmentDAO.allDep());
-//            return "staff/addStaff";
-//        }
-//        staffDAO.addStaff(staff);
-//        return "redirect:/staff/findingStaffs";
-//    }
+    @GetMapping("/updateProduct/{id}")
+    public String updateStaffGet(@PathVariable("id") int id, Model model){
+        Product product=productDAO.getProduct(id);
+        model.addAttribute("product",product);
+        model.addAttribute("colors",productDAO.getColors());
+        return "Product/updateProduct";
+
+    }
+    @PatchMapping("/updateProduct/{id}")
+    public String updateProduct(@PathVariable("id") int id,@ModelAttribute("product") @Valid Product product,BindingResult bindingResult,Model model){
+        System.out.println(product.getPrice() + "Patch request update controler");
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("colors",productDAO.getColors());
+            return "Product/updateProduct";
+        }
+       productDAO.updateProduct(product,id);
+        return "redirect:/product/findingProducts";
+
+    }
+
+    @DeleteMapping("/deleteProduct/{id}")
+    public String deleteProduct(@ModelAttribute("product") Product product,@PathVariable int id,Model model){
+        try{
+            productDAO.deleteProduct(product);
+        }catch (Exception e){
+            model.addAttribute("msg", List.of("Для удаления этого продукта необходимо:"," 1.Удалить его из таблицы Склад продуктов", " 2.Удалить его из таблицы Состав продукта"));
+            return "/Product/error";
+        }
+
+        return "redirect:/product/findingProducts";
+    }
+
+    @GetMapping("/addProduct")
+    public String addProductGet(@ModelAttribute("product") Product product,Model model){
+        model.addAttribute("colors",productDAO.getColors());
+        return "/Product/addProduct";
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(@ModelAttribute("product") @Valid Product product,BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("colors",productDAO.getColors());
+            return "Product/addProduct";
+        }
+       productDAO.addProduct(product);
+        return "redirect:/product/findingProducts";
+    }
 }
