@@ -18,20 +18,19 @@
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
-<form style="" th:method="GET" th:action="@{/product/findingProducts}" th:object="${product}">
+<form style="" th:method="GET" th:action="@{/material/find}" th:object="${material}">
     <label for="name">Введите название</label>
     <input type="text" th:field="*{name}" id="name">
     <br/>
-    <label for="color">Выберите цвет</label>
-    <select  id="color" name="color">
+    <label for="unitsOfMeasurement">Выберите единицы измерения</label>
+    <select  id="unitsOfMeasurement" name="unitsOfMeasurement">
         <option value="" >Любой</option>
-        <option th:each="col:${colors}" th:selected="${product.getConvColor==col}" th:value="${col}" th:text="${col}">
+        <option th:each="unit:${units}" th:selected="${material.getUnitsOfMeasurement()==unit}" th:value="${unit}" th:text="${unit}">
     </select>
 
     <label for="price">Введите цену</label>
     <br/>
     <input type="number" th:field="*{price}" id="price">
-
     <br/>
     <input type="submit" value="Поиск">
 
@@ -47,22 +46,22 @@
     </thead>
     <tbody>
 
-    <tr th:each="producty:${products}">
-        <td><span th:text="${producty.getName()}"> Название </span></td>
-        <td><span th:text="${producty.getConvColor()}"> Цвет </span></td>
-        <td><span th:text="${producty.getPrice()}"> Цена </span></td>
+    <tr th:each="materialy:${materials}">
+        <td><span th:text="${materialy.getName()}"> Название </span></td>
+        <td><span th:text="${materialy.getUnitsOfMeasurement()}"> Единица измерения </span></td>
+        <td><span th:text="${materialy.getPrice()}"> Цена </span></td>
 
-        <td><form th:method="GET" th:action="@{/product/updateProduct/{id} (id=${producty.getProductId()})} ">
+        <td><form th:method="GET" th:action="@{/material/update/{id} (id=${materialy.getMaterialId()})} ">
             <button>Изменить</button>
         </form></td>
-        <td><form th:method="DELETE" th:action="@{/product/deleteProduct/{id} (id=${producty.getProductId()})} ">
+        <td><form th:method="DELETE" th:action="@{/material/delete/{id} (id=${materialy.getMaterialId()})} ">
             <button>Удалить</button>
         </form></td>
     </tr>
     </tbody>
 </table>
-<form th:method="GET" th:action="@{/product/addProduct}">
-    <input type="submit" value="Добавить новый продукт">
+<form th:method="GET" th:action="@{/material/add}">
+    <input type="submit" value="Добавить новый материал">
 </form>
 </body>
 </html>

@@ -67,8 +67,6 @@ public class StaffController {
     @PostMapping("/addStaff")
     public String addStaff(@ModelAttribute("staff") @Valid Staff staff,BindingResult bindingResult,Model model){
        if(bindingResult.hasErrors()) {
-           System.out.println(staff.birthday);
-           System.out.println(bindingResult.getAllErrors().get(0));
            model.addAttribute("dep",departmentDAO.allDep());
            return "staff/addStaff";
        }

@@ -56,9 +56,24 @@ public class Product {
     }
 
     public void setColor(String color) {
+        if(color.equals("Синий")){
+            color="b";
+        }
+        if(color.equals("Красный")){
+            color= "r";
+        }
+        if(color.equals("Зелёный")){
+            color= "g";
+        }
+        if(color.equals("Белый")){
+            color= "w";
+        }
         this.color = color;
     }
     public String getConvColor(){
+        if(color==null){
+            return "";
+        }
         if(color.equals("b")){
             return "Синий";
         }
@@ -71,7 +86,7 @@ public class Product {
         if(color.equals("w")){
             return "Белый";
         }
-        return null;
+        return "";
     }
 
 

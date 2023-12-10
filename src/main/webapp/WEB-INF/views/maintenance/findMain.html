@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Поиск</title>
+  <title>Техническое обслуживание</title>
 
   <style>
         /* Стили таблицы (IKSWEB) */
@@ -21,7 +21,7 @@
   <input type="date" th:field="*{dateOfMaintenance}" id="date">
 
   <br><label for="staffId.name">Введите имя сотрудника</label>
-  <input type="text" name="staffId.name" id="staffId.name">
+  <input type="text" name="staffId.name" id="staffId.name" th:field="*{staffId.name}">
   <br/>
   <input type="submit" value="Поиск">
 

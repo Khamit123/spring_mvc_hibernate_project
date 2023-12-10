@@ -54,7 +54,7 @@ public class MaintenanceController {
         return "redirect:/maintenance/findMaintenance";
     }
 
-    @GetMapping("/addMaintenancet")
+    @GetMapping("/addMaintenance")
     public String addMaintenanceGet(@ModelAttribute("main") Maintenance maintenance){
 
         return "maintenance/addMain";
