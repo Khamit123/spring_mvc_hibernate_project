@@ -15,30 +15,26 @@
 
   <br/><label for="machineTypeId">Выберите тип</label>
   <select  id="machineTypeId" name="machineTypeId.name">
-    <option value="" >Все</option>
     <option th:each="a:${types}" th:selected="${mac.machineTypeId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
   </select>
 
   <br/><label for="machineStatusId">Выберите статус</label>
   <select  id="machineStatusId" name="machineStatusId.name">
-    <option value="" >Все</option>
     <option th:each="a:${statuses}" th:selected="${mac.machineStatusId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
   </select>
-  <br/><label for="maintenance">Выберите номер техобслуживания</label>
-  <select  id="maintenance" name="maintenance.maintenanceId">
-    <option value="" >Все</option>
-    <option th:each="a:${mains}" th:selected="${mac.maintenance.maintenanceId==a.getMaintenanceId}" th:value="${a.getMaintenanceId}" th:text="${a.getMaintenanceId}">
+  <br/><label for="maintenance.maintenanceId">Выберите номер техобслуживания</label>
+  <select  id="maintenance.maintenanceId" name="maintenance.maintenanceId">
+    <option th:each="a:${mains}" th:selected="${mac.maintenance.maintenanceId==a.getMaintenanceId}" th:value="${a.getMaintenanceId()}" th:text="${a.getMaintenanceId}">
 
   </select>
 
   <label for="factoryId">Выберите завод</label>
   <br/><select  id="factoryId" name="factoryId.name">
-    <option value="" >Все</option>
-    <option th:each="a:${factories}" th:selected="${mac.factoryId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
+  <option th:each="a:${factories}" th:selected="${mac.factoryId.name==a.getName}" th:value="${a.getName}" th:text="${a.getName}">
 
-  </select>
+</select>
   <input type="submit" value="Добавить">
 
 </form>

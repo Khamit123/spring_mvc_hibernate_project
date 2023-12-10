@@ -74,14 +74,25 @@ public class MachineController {
     }
 
     @GetMapping("/addMachine")
-    public String addMachineGet(@ModelAttribute("mac") Machinery machinery){
-
+    public String addMachineGet(@ModelAttribute("mac") Machinery machinery,Model model){
+        model.addAttribute("names",machineDAO.getNames());
+        model.addAttribute("types",machineDAO.getType());
+        model.addAttribute("statuses",machineDAO.getStatus());
+        model.addAttribute("factories",machineDAO.getFactory());
+        model.addAttribute("mains",machineDAO.getMain());
         return "/machinery/addMachine";
     }
 
     @PostMapping("/addMachine")
-    public String addMachine(@ModelAttribute("mac") @Valid Machinery machinery,BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return "machinery/addMachine";
+    public String addMachine(@ModelAttribute("mac") @Valid Machinery machinery,BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("names",machineDAO.getNames());
+            model.addAttribute("types",machineDAO.getType());
+            model.addAttribute("statuses",machineDAO.getStatus());
+            model.addAttribute("factories",machineDAO.getFactory());
+            model.addAttribute("mains",machineDAO.getMain());
+            return "machinery/addMachine";
+        }
         machineDAO.addMachine(machinery);
         return "redirect:/machine/findMachine";
     }

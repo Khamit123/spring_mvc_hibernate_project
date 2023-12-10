@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавление</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/maintenance/addMaintenance}" th:object="${main}">
+  <label for="date">Выберите дату</label>
+  <input type="date" th:field="*{dateOfMaintenance}" id="date">
+
+  <label for="staffId.name">Введите имя сотрудника</label>
+  <input type="text" name="staffId.name" id="staffId.name">
+  <input type="submit" value="Добавить">
+
+  <label for="wh">Введите что сделано</label>
+  <input type="text" th:field="*{whatDone}" id="wh">
+  <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

@@ -11,9 +11,6 @@
         table.iksweb td{font-size:13px;color:#354251;}
         table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
         table.iksweb tr:hover td{color:#354251;cursor:default;}
-
-
-
     </style>
 </head>
 <div th:insert="~{header :: #head}"></div>
@@ -63,7 +60,7 @@
     <td><span th:text="${mach.getMachineTypeId.getName}"> Тип </span></td>
     <td><span th:text="${mach.getMachineStatusId.getName}"> Статус </span></td>
     <td><span th:text="${mach.getFactoryId.getName}"> Завод </span></td>
-    <td><span th:text="${mach.maintenance.getMaintenanceId}">Техобслуживание </span></td>
+    <td><a th:href="@{/maintenance/findMaintenance(id=${mach.maintenance.getMaintenanceId}) }" th:text="${mach.maintenance.getMaintenanceId}">Номер техобслуживание </a></td>
 
     <td><form th:method="GET" th:action="@{/machine/updateMachine/{id} (id=${mach.getMachineId})} ">
       <button>Изменить</button>
@@ -75,7 +72,7 @@
   </tbody>
 </table>
 <form th:method="GET" th:action="@{/machine/addMachine}">
-  <input type="submit" value="Добавить нового сотрудника">
+  <input type="submit" value="Добавить новое оборудование">
 </form>
 </body>
 </html>

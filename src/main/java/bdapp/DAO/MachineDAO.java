@@ -36,15 +36,15 @@ public class MachineDAO {
         if(factory=="" || factory==null){
             factory="'%'";
         }
-        else factory= "'" +factory +"%'";
+        else factory= "'%" +factory +"%'";
         if(status=="" || status==null){
             status="'%'";
         }
-        else status= "'" +status +"%'";
+        else status= "'%" +status +"%'";
         if(type=="" || type==null){
             type="'%'";
         }
-        else type= "'" +type +"%'";
+        else type= "'%" +type +"%'";
 
 
         Query query= session.createQuery("from Machinery where  name like "+name+" and factoryId.name like " + factory +" " +
@@ -77,7 +77,6 @@ public class MachineDAO {
         machinery.setMachineTypeId((MachineType) session.createQuery
                 ("from MachineType where name ='"+machinery.getMachineTypeId().getName()+"'")
                 .getResultList().get(0));
-        System.out.println(machinery.getName());
         machinery.setMaintenance(session.get(Maintenance.class,machinery.getMaintenance().getMaintenanceId()));
         session.merge(machinery);
         session.getTransaction().commit();
@@ -95,6 +94,16 @@ public class MachineDAO {
     public  void addMachine(Machinery machinery){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
+        machinery.setFactoryId((Factory) session.createQuery
+                        ("from Factory where name ='"+ machinery.getFactoryId().getName()+"'")
+                .getResultList().get(0));
+        machinery.setMachineStatusId((MachineStatus) session.createQuery
+                        ("from MachineStatus where name ='"+machinery.getMachineStatusId().getName()+"'")
+                .getResultList().get(0));
+        machinery.setMachineTypeId((MachineType) session.createQuery
+                        ("from MachineType where name ='"+machinery.getMachineTypeId().getName()+"'")
+                .getResultList().get(0));
+        machinery.setMaintenance(session.get(Maintenance.class,machinery.getMaintenance().getMaintenanceId()));
         session.persist(machinery);
         session.getTransaction().commit();
     }

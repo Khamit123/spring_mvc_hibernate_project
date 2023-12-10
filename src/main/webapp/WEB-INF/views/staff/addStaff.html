@@ -23,7 +23,7 @@
 
 
     <br/> <label for="salary">Введите зарплату</label>
-    <input type="text" th:field="*{salary}" id="salary">
+    <input type="number" th:field="*{salary}" id="salary">
     <div style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></div>
 
 

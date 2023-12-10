@@ -25,6 +25,9 @@ public class StaffDAO {
     public List<Staff> getFindStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
+        if(staff.getId()!=0){
+           return List.of( session.get(Staff.class,staff.getId()));
+        }
         String name=staff.getName();
         String lastName=staff.getLastName();
         String email=staff.getEmail();

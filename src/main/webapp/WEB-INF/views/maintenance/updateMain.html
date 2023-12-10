@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="PATCH" th:action="@{/maintenance/updateMaintenance/{id} (id=${main.getMaintenanceId})}" th:object="${main}">
+    <label for="date">Выберите дату</label>
+    <input type="date" th:field="*{dateOfMaintenance}" id="date">
+
+    <br><label for="staffId.name">Введите имя сотрудника</label>
+    <input type="text" name="staffId.name" id="staffId.name">
+
+    <label for="wh">Введите что сделано</label>
+    <input type="text" th:field="*{whatDone}" id="wh">
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

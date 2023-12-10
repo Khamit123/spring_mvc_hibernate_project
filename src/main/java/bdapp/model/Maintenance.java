@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -27,12 +26,25 @@ public class Maintenance {
     private String whatDone;
     @OneToMany(mappedBy = "maintenance",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     List<Machinery> machineryList;
+
+    public Maintenance() {
+        this.staffId = new Staff();
+    }
+
     public int getMaintenanceId() {
         return maintenanceId;
     }
 
     public void setMaintenanceId(int maintenanceId) {
         this.maintenanceId = maintenanceId;
+    }
+
+    public Staff getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Staff staffId) {
+        this.staffId = staffId;
     }
 
     public String getDateOfMaintenance() {
