@@ -7,9 +7,14 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 @Component
 public class MaintenanceDAO {
+    private List<String> names = new ArrayList<>(List.of("ID","Дата","Сотрудник","Что сделано"));
+    public List<String> getNames() {
+        return names;
+    }
     private SessionFactory sessionFactory =new Configuration()
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(Machinery.class).addAnnotatedClass(MachineStatus.class)
