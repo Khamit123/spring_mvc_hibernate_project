@@ -54,7 +54,7 @@ public class MaintenanceController {
         }catch (Exception e){
             model.addAttribute("msg", List.of("Для удаления Техобслуживания:"," 1.Необходимо убрать это техобслуживание у оборудования" +
                     ""));
-            return "staff/error";
+            return "maintenance/error";
         }
         return "redirect:/maintenance/findMaintenance";
     }

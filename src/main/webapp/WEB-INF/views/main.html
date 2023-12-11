@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<style>
+    .btn {
+            background-color: orange;
+            border-radius: 8px;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 40px;
+            margin: 6px 3px;
+            cursor: pointer;
+        }
+</style>
+<body style="background-image: url(bd1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;">
+<h3>Выберите таблицу для просмотра</h3>
+<a class="btn" href="/staff/findingStaffs">Сотрудники</a>
+<a class="btn" href="/department/findDepartment">Отделы</a>
+<a class="btn" href="/maintenance/findMaintenance">Техобслуживание</a>
+<br><a class="btn" href="/material/find">Материалы</a>
+<a class="btn" href="/product/findingProducts">Продукты</a>
+<a class="btn" href="/machine/findMachine">Оборудование</a>
+<br><a class="btn" href="/machineType/find">Типы оборудования</a>
+<a class="btn" href="/machineStatus/find">Статусы оборудования</a>
+</body>
+</html>
