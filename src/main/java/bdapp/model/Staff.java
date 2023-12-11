@@ -55,7 +55,6 @@ public class Staff {
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "birthday")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public String birthday;
 
     @NotNull(message = "Не должно быть пустым")
@@ -64,13 +63,11 @@ public class Staff {
     private boolean isWorking;
     @NotNull(message = "Не должно быть пустым")
     @Column(name = "date_of_hire")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotEmpty(message = "Не должно быть пустым")
     private String dateOfHire;
     @NotNull(message = "Не должно быть пустым")
-    @Column(name = "date_of_slary")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotEmpty(message = "Не должно быть пустым")
+    @Column(name = "date_of_slary")
     private String dateOfSalary;
     @NotNull(message = "Не должно быть пустым")
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
