@@ -29,6 +29,9 @@
     <filter-actions connection-id="e33a5f2d-6662-4000-8b4d-095069ba2832" dataset="pen_factory.maintenance" active-filter-id="3a7d75bc-1cef-4505-8a84-818a640780d2">
       <filter id="3a7d75bc-1cef-4505-8a84-818a640780d2" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
+    <filter-actions connection-id="e33a5f2d-6662-4000-8b4d-095069ba2832" dataset="pen_factory.staff" active-filter-id="5f8c149a-ad64-42cf-84f0-7e7c4b9521d8">
+      <filter id="5f8c149a-ad64-42cf-84f0-7e7c4b9521d8" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

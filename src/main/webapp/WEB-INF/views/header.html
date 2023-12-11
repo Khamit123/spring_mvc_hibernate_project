@@ -53,7 +53,7 @@
     <header style="background:blue;height:30px">
         <div class="container">
             <div style="display: inline-block;color:white;">
-                <form th:method="GET" action="/staff/findingStaffs">
+                <form th:method="GET" action="/">
                 <button style="border:none;background:none;color:white;font-size: 16px;">Главная</button>
                 </form>
             </div>
@@ -64,7 +64,12 @@
                 <ul class="dropdown-menu">
                     <li><a href="/staff/findingStaffs">Сотрудники</a></li>
                     <li><a href="/department/findDepartment">Отделы</a></li>
-                    <li><a href="#">JavaScript</a></li>
+                    <li><a href="/maintenance/findMaintenance">Техобслуживание</a></li>
+                    <li><a href="/machine/findMachine">Оборудование</a></li>
+                    <li><a href="/material/find">Материалы</a></li>
+                    <li><a href="/product/findingProducts">Продукты</a></li>
+                    <li><a href="/machineType/find">Тип оборудования</a></li>
+                    <li><a href="/machineStatus/find">Статус оборудования</a></li>
                 </ul>
             </div>
         </div>

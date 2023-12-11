@@ -21,8 +21,6 @@ public class MachineType {
     @NotEmpty
     @Column(name = "description", nullable = true, length = -1)
     private String description;
-    @OneToMany(mappedBy = "machineTypeId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
-    List<Machinery> machineryList;
 
     public int getMachineTypeId() {
         return machineTypeId;

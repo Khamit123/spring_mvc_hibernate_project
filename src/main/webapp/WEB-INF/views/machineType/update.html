@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение материала</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="PATCH" th:action="@{/machineType/update/{id}(id=${obj.getMachineTypeId()})}" th:object="${obj}">
+    <label for="name">Введите название продукта</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <br/>
+    <label for="desc">Введите описание</label>
+    <input type="text" th:field="*{description}" id="desc">
+    <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+    <input type="submit" value="Изменить">
+
+</form>
+</body>
+</html>

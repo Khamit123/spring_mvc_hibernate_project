@@ -20,8 +20,6 @@ public class MachineStatus {
     @NotEmpty
     @Column(name = "description", nullable = true, length = -1)
     private String description;
-    @OneToMany(mappedBy = "machineStatusId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
-    List<Machinery> machineryList;
 
     public int getMachineStatusId() {
         return machineStatusId;
