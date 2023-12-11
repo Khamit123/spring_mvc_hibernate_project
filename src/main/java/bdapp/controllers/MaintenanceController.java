@@ -52,10 +52,10 @@ public class MaintenanceController {
         try{
             maintenanceDAO.deleteMaintenance(maintenance);
         }catch (Exception e){
-            model.addAttribute("msg", List.of("Для удаления Техобслуживания:"," 1.Необходимо убрать из этого отдела  всех сотрудников"));
+            model.addAttribute("msg", List.of("Для удаления Техобслуживания:"," 1.Необходимо убрать это техобслуживание у оборудования" +
+                    ""));
             return "staff/error";
         }
-
         return "redirect:/maintenance/findMaintenance";
     }
 

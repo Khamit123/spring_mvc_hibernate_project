@@ -16,7 +16,7 @@ public class Maintenance {
     @Column(name = "date_of_maintenance", nullable = false)
     @NotEmpty(message = "Не должно быть пустым")
     private String dateOfMaintenance;
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "staff_id")
     private Staff staffId;
     @NotNull

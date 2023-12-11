@@ -13,8 +13,8 @@
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="4" parent="1" name="pen_factory">
-      <IntrospectionTimestamp>2023-12-08.21:33:06</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-08.15:33:06</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-12-11.01:41:50</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-10.19:41:50</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="5" parent="1" name="performance_schema">
@@ -334,7 +334,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="76" parent="21" name="department_id">
-      <AutoIncrement>44</AutoIncrement>
+      <AutoIncrement>46</AutoIncrement>
       <DasType>tinyint|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -392,7 +392,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="88" parent="23" name="machine_status_id">
-      <AutoIncrement>5</AutoIncrement>
+      <AutoIncrement>6</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -450,7 +450,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="100" parent="25" name="machine_type_id">
-      <AutoIncrement>4</AutoIncrement>
+      <AutoIncrement>5</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -474,7 +474,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="105" parent="26" name="machine_id">
-      <AutoIncrement>3</AutoIncrement>
+      <AutoIncrement>12</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -571,6 +571,7 @@
     </column>
     <foreign-key id="125" parent="27" name="maintenance_FK">
       <ColNames>staff_id</ColNames>
+      <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>staff_id</RefColNames>
       <RefTableName>staff</RefTableName>
@@ -951,7 +952,7 @@ material_id</ColNames>
       <Type>btree</Type>
     </index>
     <column id="206" parent="35" name="product_id">
-      <AutoIncrement>7</AutoIncrement>
+      <AutoIncrement>14</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -979,266 +980,254 @@ material_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <trigger id="212" parent="35" name="insertproduct">
-      <Definer>root@localhost</Definer>
-      <Events>I</Events>
-      <SourceTextLength>69</SourceTextLength>
-      <Turn>before-row</Turn>
-    </trigger>
-    <trigger id="213" parent="35" name="updateproduct">
-      <Definer>root@localhost</Definer>
-      <Events>U</Events>
-      <SourceTextLength>69</SourceTextLength>
-      <Turn>before-row</Turn>
-    </trigger>
-    <column id="214" parent="36" name="product_id">
+    <column id="212" parent="36" name="product_id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="215" parent="36" name="storage_name">
+    <column id="213" parent="36" name="storage_name">
       <DasType>varchar(50)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="216" parent="36" name="product_quantity">
+    <column id="214" parent="36" name="product_quantity">
       <DasType>int|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="217" parent="36" name="adress">
+    <column id="215" parent="36" name="adress">
       <DasType>varchar(45)|0s</DasType>
       <Position>4</Position>
     </column>
-    <foreign-key id="218" parent="36" name="product_storage_FK">
+    <foreign-key id="216" parent="36" name="product_storage_FK">
       <ColNames>product_id</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>product_id</RefColNames>
       <RefTableName>product</RefTableName>
     </foreign-key>
-    <index id="219" parent="36" name="PRIMARY">
+    <index id="217" parent="36" name="PRIMARY">
       <ColNames>storage_name
 product_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="220" parent="36" name="product_storage_FK">
+    <index id="218" parent="36" name="product_storage_FK">
       <ColNames>product_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="221" parent="36" name="PRIMARY">
+    <key id="219" parent="36" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <check id="222" parent="37" name="staff_chk_1">
+    <check id="220" parent="37" name="staff_chk_1">
       <NameSurrogate>1</NameSurrogate>
       <Predicate>length(`phone_number`) = 11</Predicate>
     </check>
-    <column id="223" parent="37" name="staff_id">
-      <AutoIncrement>14</AutoIncrement>
+    <column id="221" parent="37" name="staff_id">
+      <AutoIncrement>16</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="224" parent="37" name="name">
+    <column id="222" parent="37" name="name">
       <DasType>varchar(30)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="225" parent="37" name="last_name">
+    <column id="223" parent="37" name="last_name">
       <DasType>varchar(30)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="226" parent="37" name="middle_name">
+    <column id="224" parent="37" name="middle_name">
       <DasType>varchar(30)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="227" parent="37" name="salary">
+    <column id="225" parent="37" name="salary">
       <DasType>int|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="228" parent="37" name="phone_number">
+    <column id="226" parent="37" name="phone_number">
       <DasType>decimal(11)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="229" parent="37" name="email">
+    <column id="227" parent="37" name="email">
       <DasType>varchar(100)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="230" parent="37" name="post">
+    <column id="228" parent="37" name="post">
       <DasType>varchar(30)|0s</DasType>
       <Position>8</Position>
     </column>
-    <column id="231" parent="37" name="birthday">
+    <column id="229" parent="37" name="birthday">
       <DasType>date|0s</DasType>
       <Position>9</Position>
     </column>
-    <column id="232" parent="37" name="isworking">
+    <column id="230" parent="37" name="isworking">
       <DasType>tinyint(1)|0s</DasType>
       <Position>10</Position>
     </column>
-    <column id="233" parent="37" name="department_id">
+    <column id="231" parent="37" name="department_id">
       <DasType>tinyint|0s</DasType>
       <Position>11</Position>
     </column>
-    <column id="234" parent="37" name="date_of_hire">
+    <column id="232" parent="37" name="date_of_hire">
       <DasType>date|0s</DasType>
       <Position>12</Position>
     </column>
-    <column id="235" parent="37" name="date_of_slary">
+    <column id="233" parent="37" name="date_of_slary">
       <DasType>date|0s</DasType>
       <Position>13</Position>
     </column>
-    <foreign-key id="236" parent="37" name="staff_FK">
+    <foreign-key id="234" parent="37" name="staff_FK">
       <ColNames>department_id</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>department_id</RefColNames>
       <RefTableName>department</RefTableName>
     </foreign-key>
-    <index id="237" parent="37" name="PRIMARY">
+    <index id="235" parent="37" name="PRIMARY">
       <ColNames>staff_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="238" parent="37" name="staff_FK">
+    <index id="236" parent="37" name="staff_FK">
       <ColNames>department_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="239" parent="37" name="PRIMARY">
+    <key id="237" parent="37" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="240" parent="38" name="id">
+    <column id="238" parent="38" name="id">
       <AutoIncrement>6</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="241" parent="38" name="name">
+    <column id="239" parent="38" name="name">
       <DasType>varchar(45)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="242" parent="38" name="subject">
+    <column id="240" parent="38" name="subject">
       <DasType>varchar(45)|0s</DasType>
       <Position>3</Position>
     </column>
-    <index id="243" parent="38" name="PRIMARY">
+    <index id="241" parent="38" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="244" parent="38" name="PRIMARY">
+    <key id="242" parent="38" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="245" parent="39" name="Продукт">
+    <column id="243" parent="39" name="Продукт">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="246" parent="39" name="Цвет">
+    <column id="244" parent="39" name="Цвет">
       <DasType>varchar(30)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="247" parent="39" name="Дата производства">
+    <column id="245" parent="39" name="Дата производства">
       <DasType>date|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="248" parent="39" name="Количество">
+    <column id="246" parent="39" name="Количество">
       <DasType>int|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="249" parent="39" name="Фабрика">
+    <column id="247" parent="39" name="Фабрика">
       <DasType>varchar(30)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="250" parent="39" name="ФИО">
+    <column id="248" parent="39" name="ФИО">
       <DasType>varchar(92)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="251" parent="40" name="Название станка">
+    <column id="249" parent="40" name="Название станка">
       <DasType>varchar(30)|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="252" parent="40" name="Дата последнего обслуживания">
+    <column id="250" parent="40" name="Дата последнего обслуживания">
       <DasType>date|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="253" parent="40" name="Работник проводивший обслуживание">
+    <column id="251" parent="40" name="Работник проводивший обслуживание">
       <DasType>varchar(30)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="254" parent="40" name="Статус">
+    <column id="252" parent="40" name="Статус">
       <DasType>varchar(30)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="255" parent="40" name="Тип">
+    <column id="253" parent="40" name="Тип">
       <DasType>varchar(30)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="256" parent="40" name="Фабрика на которой находится">
+    <column id="254" parent="40" name="Фабрика на которой находится">
       <DasType>varchar(30)|0s</DasType>
       <Position>6</Position>
     </column>
-    <column id="257" parent="41" name="staff_id">
+    <column id="255" parent="41" name="staff_id">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="258" parent="41" name="ФИО">
+    <column id="256" parent="41" name="ФИО">
       <DasType>varchar(92)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="259" parent="41" name="Должность">
+    <column id="257" parent="41" name="Должность">
       <DasType>varchar(30)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="260" parent="41" name="Отдел">
+    <column id="258" parent="41" name="Отдел">
       <DasType>varchar(30)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="261" parent="41" name="Фабрика">
+    <column id="259" parent="41" name="Фабрика">
       <DasType>varchar(30)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="262" parent="42" name="ID">
+    <column id="260" parent="42" name="ID">
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="263" parent="42" name="Название">
+    <column id="261" parent="42" name="Название">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="264" parent="42" name="Цвет">
+    <column id="262" parent="42" name="Цвет">
       <DasType>varchar(30)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="265" parent="43" name="Название процесса">
+    <column id="263" parent="43" name="Название процесса">
       <DasType>varchar(30)|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="266" parent="43" name="Описание процесса">
+    <column id="264" parent="43" name="Описание процесса">
       <DasType>text|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="267" parent="43" name="Название продукта">
+    <column id="265" parent="43" name="Название продукта">
       <DasType>varchar(30)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="268" parent="43" name="Название мматериала">
+    <column id="266" parent="43" name="Название мматериала">
       <DasType>varchar(30)|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="269" parent="43" name="Количество материала">
+    <column id="267" parent="43" name="Количество материала">
       <DasType>int|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="270" parent="43" name="Название оборудования">
+    <column id="268" parent="43" name="Название оборудования">
       <DasType>varchar(30)|0s</DasType>
       <Position>6</Position>
     </column>
