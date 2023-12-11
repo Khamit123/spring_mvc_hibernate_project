@@ -39,8 +39,11 @@ public class StaffController {
 
     }
     @PatchMapping("/updateStaff/{id}")
-    public String updateStaff(@PathVariable("id") int id,@ModelAttribute("staff")@Valid Staff staff,BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return "staff/updateStafff";
+    public String updateStaff(@PathVariable("id") int id,@ModelAttribute("staff")@Valid Staff staff,BindingResult bindingResult,Model model){
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("dep",departmentDAO.allDep());
+            return "staff/updateStafff";
+        }
         staffDAO.updateStaff(staff);
         return "redirect:/staff/findingStaffs";
 

@@ -8,7 +8,6 @@
 <body>
 <form style="" th:method="POST" th:action="@{/material/add}" th:object="${material}">
     <label for="name">Введите название продукта</label>
-    <label for="name">Введите название</label>
     <input type="text" th:field="*{name}" id="name">
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     <br/>
@@ -23,7 +22,7 @@
     <input type="number" th:field="*{price}" id="price">
     <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
     <br/>
-    <input type="submit" value="Поиск">
+    <input type="submit" value="Добавить">
 
 </form>
 </body>
