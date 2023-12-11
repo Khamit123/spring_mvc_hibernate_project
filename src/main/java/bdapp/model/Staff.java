@@ -19,18 +19,18 @@ public class Staff {
 
     @Column(name = "name")
     @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
 
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "last_name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Фамилия должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+",message = "Фамилия должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String lastName;
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "middle_name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Отчество должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+",message = "Отчество должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String middleName;
     @NotNull(message = "Не должно быть пустым")
     @Column(name = "salary")

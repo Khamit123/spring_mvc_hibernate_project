@@ -3,6 +3,7 @@ package bdapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ public class MachineType {
     private int machineTypeId;
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name", nullable = true, length = 30)
     private String name;
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
     @Column(name = "description", nullable = true, length = -1)
     private String description;
 

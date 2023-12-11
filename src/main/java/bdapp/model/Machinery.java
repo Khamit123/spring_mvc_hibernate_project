@@ -3,6 +3,7 @@ package bdapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
 
@@ -35,6 +36,7 @@ public class Machinery {
     @NotNull
     @NotEmpty
     @Column(name = "name", nullable = true, length = 30)
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+[ а-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
 
     @NotNull

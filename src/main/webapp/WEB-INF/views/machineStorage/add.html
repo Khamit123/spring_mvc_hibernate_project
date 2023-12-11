@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/machineStorage/add}" th:object="${obj}">
+    <label for="name">Введите название</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <br/>
+    <label for="desc">Введите адрес</label>
+    <input type="text" th:field="*{adress}" id="desc">
+    <div style="color: red" th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}"></div>
+    <br/> <label for="mc">Выберите оборудование</label>
+    <select  th:field="*{machineId.machineId}" id="mc">
+        <option th:each="a:${mch}" th:selected="${obj.machineId.machineId==a.getMachineId}"  th:value="${a.getMachineId}" th:text="${a.getName}">
+    </select>
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

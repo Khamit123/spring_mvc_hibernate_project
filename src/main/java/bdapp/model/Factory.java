@@ -3,6 +3,7 @@ package bdapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,11 +16,12 @@ public class Factory {
     @Column(name = "factory_id", nullable = false)
     private int factoryId;
 
-    @NotEmpty
+    @NotEmpty    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "adress", nullable = true, length = 30)
     private String adress;
 
     @NotEmpty
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name", nullable = true, length = 30)
     private String name;
 
@@ -27,9 +29,6 @@ public class Factory {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "staff_id")
     private Staff staffId;
-
-    @OneToMany(mappedBy = "factoryId",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
-    List<Machinery> machineryList;
 
 
 
@@ -70,11 +69,11 @@ public class Factory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Factory factory = (Factory) o;
-        return factoryId == factory.factoryId && staffId == factory.staffId && adress.equals(factory.adress) && name.equals(factory.name) && Objects.equals(machineryList, factory.machineryList);
+        return factoryId == factory.factoryId && staffId == factory.staffId && adress.equals(factory.adress) && name.equals(factory.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(factoryId, adress, name, staffId, machineryList);
+        return Objects.hash(factoryId, adress, name, staffId);
     }
 }

@@ -3,6 +3,7 @@ package bdapp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Maintenance {
     @NotNull
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "what_done", nullable = true, length = -1)
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
     private String whatDone;
     @OneToMany(mappedBy = "maintenance",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     List<Machinery> machineryList;

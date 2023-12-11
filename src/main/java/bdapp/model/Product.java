@@ -13,7 +13,7 @@ public class Product {
     @Id
     @Column(name = "product_id")
     private int productId;
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+( )?[а-яё]*",message = "Название продукта должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+( )?[а-яё]*",message = "Название продукта должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name")
     private String name;
 
