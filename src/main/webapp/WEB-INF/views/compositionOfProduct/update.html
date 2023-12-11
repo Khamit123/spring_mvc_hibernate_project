@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение состава</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="PATCH" th:action="@{/compositionOfProduct/update/{matId}/{prodId}
+         (matId=${compositionOfProduct.getMaterial().getMaterialId()},prodId=${compositionOfProduct.getProduct().getProductId()})} " th:object="${compositionOfProduct}">
+    <label for="product.productId">Выберите продукт</label>
+    <select id="product.productId" name="product.productId">
+        <option th:each="prdouct:${products}"
+                th:selected="${compositionOfProduct.getProduct().getProductId()==prdouct.productId}"
+                th:value="${prdouct.productId}" th:text="${prdouct.colorName}">
+    </select>
+    <label for="material.materialId">Выберите материал</label>
+    <select id="material.materialId" name="material.materialId">
+        <option value="">Любой</option>
+        <option th:each="material:${materials}"
+                th:selected="${compositionOfProduct.getMaterial().getMaterialId()==material.materialId}"
+                th:value="${material.materialId}" th:text="${material.name}">
+    </select>
+    <br/>
+    <input type="number" th:field="*{materialQuntity}" id="price">
+    <div style="color: red" th:if="${#fields.hasErrors('materialQuntity')}" th:errors="*{materialQuntity}"></div>
+    <div style="color: red" th:if="${error!='null'}" th:text="${error}"></div>
+
+    <br/>
+    <input type="submit" value="Изменить">
+
+</form>
+</body>
+</html>

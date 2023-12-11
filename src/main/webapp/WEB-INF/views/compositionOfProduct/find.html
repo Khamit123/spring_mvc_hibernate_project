@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Состав продукта</title>
+
+    <style>
+        /* Стили таблицы (IKSWEB) */
+        table.iksweb{text-decoration: none;border-collapse:collapse;width:100%;text-align:center;}
+        table.iksweb th{font-weight:normal;font-size:14px; color:#ffffff;background-color:#354251;}
+        table.iksweb td{font-size:13px;color:#354251;}
+        table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
+        table.iksweb tr:hover td{color:#354251;cursor:default;}
+
+
+
+    </style>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="GET" th:action="@{/compositionOfProduct/find}" th:object="${compositionOfProduct}">
+
+    <label for="product">Выберите продукт</label>
+    <select  id="product"  th:field="*{product.productId}">
+        <option value="0" >Любой</option>
+        <option th:each="prdouc:${products}"
+                th:selected="${compositionOfProduct.getProduct().getName()==prdouc.name}"
+                th:value="${prdouc.productId}" th:text="${prdouc.getColorName()}">
+    </select>
+    <label for="material">Выберите материал</label>
+    <select  id="material" th:field="*{material.materialId}">
+        <option value="0" >Любой</option>
+        <option th:each="materia:${materials}"
+                th:selected="${compositionOfProduct.getMaterial().getName()==materia.name}"
+                th:value="${materia.materialId}" th:text="${materia.name}">
+    </select>
+<!--    <br/>-->
+<!--    <input type="number" th:field="*{price}" id="price">-->
+
+
+    <br/>
+    <input type="submit" value="Поиск">
+
+</form>
+
+<table class="iksweb">
+    <thead>
+    <tr>
+        <th th:each="name:${names}" th:text="${name}"></th>
+        <th>Изменение</th>
+        <th>Удаление</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="compositionOfProducty:${compositionOfProducts}">
+        <td><span th:text="${compositionOfProducty.getProduct().getColorName()}"> Название продукта </span></td>
+        <td><span th:text="${compositionOfProducty.getMaterial().getName()}"> Название материала </span></td>
+        <td><span th:text="${compositionOfProducty.getMaterialQuntity()}"> Количество материала </span></td>
+
+        <td><form th:method="GET" th:action="@{/compositionOfProduct/update/{matId}/{prodId}
+         (matId=${compositionOfProducty.getMaterial().getMaterialId()},prodId=${compositionOfProducty.getProduct().getProductId()})} ">
+            <button>Изменить</button>
+        </form></td>
+        <td><form th:method="DELETE" th:action="@{/compositionOfProduct/delete/{matId}/{prodId}
+         (matId=${compositionOfProducty.getMaterial().getMaterialId()},prodId=${compositionOfProducty.getProduct().getProductId()})} ">
+            <button>Удалить</button>
+        </form></td>
+    </tr>
+    </tbody>
+</table>
+<form th:method="GET" th:action="@{/compositionOfProduct/add}">
+    <input type="submit" value="Добавить новый состав">
+</form>
+</body>
+</html>

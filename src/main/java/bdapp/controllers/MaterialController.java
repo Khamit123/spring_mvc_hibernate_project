@@ -20,7 +20,7 @@ public class MaterialController {
 
 
     @GetMapping("/find")
-    public String findingStaffs(Model model, @ModelAttribute("material") Material material){
+    public String find(Model model, @ModelAttribute("material") Material material){
         model.addAttribute("names",materialDAO.getNames());
         model.addAttribute("materials",materialDAO.getFind(material));
         model.addAttribute("units",materialDAO.getUnits());
@@ -47,7 +47,7 @@ public class MaterialController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@ModelAttribute("material") Material material,@PathVariable int id,Model model){
+    public String delete(@ModelAttribute("material") Material material,@PathVariable("id") int id,Model model){
         try{
             materialDAO.delete(material);
         }catch (Exception e){

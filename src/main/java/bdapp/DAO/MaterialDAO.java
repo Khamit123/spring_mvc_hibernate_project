@@ -66,8 +66,7 @@ public class MaterialDAO {
     public void update(Material newMaterial,int id){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Material material=session.get(Material.class,id);
-        newMaterial.setMaterialId(material.getMaterialId());
+        newMaterial.setMaterialId(id);
         session.merge(newMaterial);
         session.getTransaction().commit();
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/compositionOfProduct/add}" th:object="${compositionOfProduct}">
+    <label for="product.productId">Выберите продукт</label>
+    <select id="product.productId" name="product.productId">
+        <option th:each="prdouct:${products}"
+                th:selected="${compositionOfProduct.getProduct().getName()==prdouct.name}"
+                th:value="${prdouct.productId}" th:text="${prdouct.colorName}">
+    </select>
+    <label for="material.materialId">Выберите материал</label>
+    <select id="material.materialId" name="material.materialId">
+        <option th:each="material:${materials}"
+                th:selected="${compositionOfProduct.getMaterial().getName()==material.name}"
+                th:value="${material.materialId}" th:text="${material.name}">
+    </select>
+    <br/>
+    <input type="number" th:field="*{materialQuntity}" id="price">
+    <div style="color: red" th:if="${#fields.hasErrors('materialQuntity')}" th:errors="*{materialQuntity}"></div>
+    <div style="color: red" th:if="${error!='null'}" th:text="${error}"></div>
+    <br/>
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

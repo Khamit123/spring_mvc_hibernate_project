@@ -16,7 +16,7 @@ public class Material {
     private int materialId;
 
     @Column(name = "name")
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+",message = "Название материала должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ].[а-яё]+( )?[а-яё]*",message = "Название материала должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
 
     @Column(name = "units_of_measurement")
