@@ -19,7 +19,7 @@
     <select  id="customer"  th:field="*{deliveryCompany.id}">
         <option value="0" >Любой</option>
         <option th:each="comp:${companies}"
-                th:selected="${obj.deliveryCompany.id==comp.name}"
+                th:selected="${obj.deliveryCompany.name==comp.name}"
                 th:value="${comp.id}" th:text="${comp.name}">
     </select>
 

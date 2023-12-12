@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение материала</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="PATCH" th:action="@{/processStage/update/{id}(id=${obj.getId})}" th:object="${obj}">
+
+    <br/>  <label for="mact">Выберите тип машины</label>
+    <select  th:field="*{machineType.machineTypeId}" id="mact">
+        <option value="0">Все</option>
+        <option th:each="a:${mactypes}" th:selected="${obj.machineType.getMachineTypeId()==a.getMachineTypeId()}"
+                th:value="${a.getMachineTypeId()}" th:text="${a.name}">
+    </select>
+    <br/>  <label for="pros">Выберите процесс</label>
+    <select  th:field="*{process.id}" id="pros">
+        <option value="0">Все</option>
+        <option th:each="a:${proceses}" th:selected="${obj.process.id==a.getId}"
+                th:value="${a.getId}" th:text="${a.getName}">
+    </select>
+
+
+    <br/>  <label for="machineQuantity">Введите количество</label>
+    <input type="number" th:field="*{machineQuantity}" id="machineQuantity">
+    <div style="color: red" th:if="${#fields.hasErrors('machineQuantity')}" th:errors="*{machineQuantity}"></div>
+
+
+    <br/>
+    <input type="submit" value="Изменить">
+
+</form>
+</body>
+</html>

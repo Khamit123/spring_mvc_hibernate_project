@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Этапы процесса</title>
+
+    <style>
+        /* Стили таблицы (IKSWEB) */
+        table.iksweb{text-decoration: none;border-collapse:collapse;width:100%;text-align:center;}
+        table.iksweb th{font-weight:normal;font-size:14px; color:#ffffff;background-color:#354251;}
+        table.iksweb td{font-size:13px;color:#354251;}
+        table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
+        table.iksweb tr:hover td{color:#354251;cursor:default;}
+
+
+
+    </style>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="GET" th:action="@{/processStage/find}" th:object="${obj}">
+
+    <br/>  <label for="pros">Введите название процесс</label>
+    <input type="text" th:field="*{process.name}" id="pros">
+
+    <br/>  <label for="mact">Выберите тип машины</label>
+    <select  th:field="*{machineType.machineTypeId}" id="mact">
+        <option value="0">Все</option>
+        <option th:each="a:${mactypes}" th:selected="${obj.machineType.getMachineTypeId()==a.getMachineTypeId()}"
+                th:value="${a.getMachineTypeId()}" th:text="${a.name}">
+    </select>
+    <br/>
+
+    <input type="submit" value="Поиск">
+</form>
+
+<table class="iksweb">
+    <thead>
+    <tr>
+        <th th:each="name:${names}" th:text="${name}"></th>
+        <th>Удаление</th>
+        <th>Изменение</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="o:${objs}">
+        <td><span th:text="${o.process.name}">  </span></td>
+        <td><span th:text="${o.getMachineType().name}"> </span></td>
+        <td><span th:text="${o.getMachineQuantity()}"> </span></td>
+
+        <td><form th:method="GET" th:action="@{/processStage/update/{id} (id=${o.getId})} ">
+            <button>Изменить</button>
+        </form></td>
+
+        <td><form th:method="DELETE" th:action="@{/processStage/delete/{id} (id=${o.getId})} ">
+            <button>Удалить</button>
+        </form></td>
+    </tr>
+    </tbody>
+</table>
+<form th:method="GET" th:action="@{/processStage/add}">
+    <input type="submit" value="Добавить новый этап процесса">
+</form>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Типы оборудования</title>
+    <title>Производство</title>
 
     <style>
         /* Стили таблицы (IKSWEB) */
@@ -18,9 +18,16 @@
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
-<form style="" th:method="GET" th:action="@{/machineType/find}" th:object="${obj}">
+<form style="" th:method="GET" th:action="@{/factory/find}" th:object="${obj}">
     <label for="name">Введите название</label>
     <input type="text" th:field="*{name}" id="name">
+    <br><label for="adress">Введите адрес</label>
+    <input type="text" th:field="*{adress}" id="adress">
+    <br/>  <label for="staff">Выберите сотрудника</label>
+    <select  th:field="*{staffId.id}" id="staff">
+        <option value="0">Все</option>
+        <option th:each="a:${staffs}" th:selected="${obj.staffId.id==a.getId}"  th:value="${a.getId}" th:text="${a.FullName}">
+    </select>
     <input type="submit" value="Поиск">
 
 </form>
@@ -36,20 +43,21 @@
     <tbody>
 
     <tr th:each="o:${objs}">
-        <td><span th:text="${o.getName()}">  </span></td>
-        <td><span th:text="${o.getDescription}"> </span></td>
-
-        <td><form th:method="GET" th:action="@{/machineType/update/{id} (id=${o.getMachineTypeId()})} ">
+        <td><span th:text="${o.getName()}"> </span></td>
+        <td><span th:text="${o.getAdress()}"> </span></td>
+        <td><span th:text="${o.getStaffId().FullName()}"> </span></td>
+        <td><form th:method="GET" th:action="@{/factory/update/{id} (id=${o.getFactoryId()})} ">
             <button>Изменить</button>
         </form></td>
-        <td><form th:method="DELETE" th:action="@{/machineType/delete/{id} (id=${o.getMachineTypeId()})} ">
+
+        <td><form th:method="DELETE" th:action="@{/factory/delete/{id} (id=${o.getFactoryId})} ">
             <button>Удалить</button>
         </form></td>
     </tr>
     </tbody>
 </table>
-<form th:method="GET" th:action="@{/machineType/add}">
-    <input type="submit" value="Добавить новый тип">
+<form th:method="GET" th:action="@{/factory/add}">
+    <input type="submit" value="Добавить новый завод">
 </form>
 </body>
 </html>

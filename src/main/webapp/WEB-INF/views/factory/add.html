@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/factory/add}" th:object="${obj}">
+    <label for="name">Введите названиеу</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <label for="adress">Введите адрес</label>
+    <input type="text" th:field="*{adress}" id="adress">
+    <div style="color: red" th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}"></div>
+    <br/>  <label for="staff">Выберите сотрудника</label>
+    <select  th:field="*{staffId.id}" id="staff">
+        <option th:each="a:${staffs}" th:selected="${obj.staffId.id==a.getId}"  th:value="${a.getId}" th:text="${a.FullName}">
+    </select>
+
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

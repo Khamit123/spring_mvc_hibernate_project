@@ -1,58 +1,66 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
+
+import java.util.Objects;
 
 @Entity
+@Table(name = "process")
 public class Process {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "process_id", nullable = false)
-    private Integer processId;
+    private int id;
 
-    @Column(name = "product_id", nullable = true)
-    private Integer productId;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @Column(name = "material_id", nullable = true)
-    private Integer materialId;
-
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "material_id")
+    private Material material;
+    @Min(value = 1,message = "Минимальное значение 1")
     @Column(name = "material_quantity", nullable = true)
-    private Integer materialQuantity;
-
+    private int materialQuantity;
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название компании должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Length(max = 30,message ="Максимальная длина 30" )
     @Column(name = "name", nullable = true, length = 30)
     private String name;
 
-    @Column(name = "description", nullable = true, length = -1)
+    @Column(name = "description", nullable = true)
     private String description;
 
-    public Integer getProcessId() {
-        return processId;
+    public int getId() {
+        return id;
     }
 
-    public void setProcessId(Integer processId) {
-        this.processId = processId;
+    public void setId(int processId) {
+        this.id = processId;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Process() {
+        product=new Product();
+        material=new Material();
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public Integer getMaterialId() {
-        return materialId;
-    }
-
-    public void setMaterialId(Integer materialId) {
-        this.materialId = materialId;
-    }
-
-    public Integer getMaterialQuantity() {
+    public int getMaterialQuantity() {
         return materialQuantity;
     }
 
     public void setMaterialQuantity(Integer materialQuantity) {
+
+        if(materialQuantity==null){
+            materialQuantity=0;
+        }
         this.materialQuantity = materialQuantity;
     }
 
@@ -72,32 +80,32 @@ public class Process {
         this.description = description;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Process process = (Process) o;
-
-        if (processId != null ? !processId.equals(process.processId) : process.processId != null) return false;
-        if (productId != null ? !productId.equals(process.productId) : process.productId != null) return false;
-        if (materialId != null ? !materialId.equals(process.materialId) : process.materialId != null) return false;
-        if (materialQuantity != null ? !materialQuantity.equals(process.materialQuantity) : process.materialQuantity != null)
-            return false;
-        if (name != null ? !name.equals(process.name) : process.name != null) return false;
-        if (description != null ? !description.equals(process.description) : process.description != null) return false;
-
-        return true;
+        return id == process.id && materialQuantity == process.materialQuantity && Objects.equals(product, process.product) && Objects.equals(material, process.material) && Objects.equals(name, process.name) && Objects.equals(description, process.description);
     }
 
     @Override
     public int hashCode() {
-        int result = processId != null ? processId.hashCode() : 0;
-        result = 31 * result + (productId != null ? productId.hashCode() : 0);
-        result = 31 * result + (materialId != null ? materialId.hashCode() : 0);
-        result = 31 * result + (materialQuantity != null ? materialQuantity.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        return Objects.hash(id, product, material, materialQuantity, name, description);
     }
 }

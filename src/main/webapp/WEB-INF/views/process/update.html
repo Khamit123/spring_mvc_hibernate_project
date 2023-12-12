@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение материала</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="PATCH" th:action="@{/process/update/{id}(id=${obj.getId})}" th:object="${obj}">
+    <label for="name">Введите название</label>
+    <input type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+
+    <br/>  <label for="product">Выберите продукт</label>
+    <select  th:field="*{product.productId}" id="product">
+        <option value="0">Все</option>
+        <option th:each="a:${products}" th:selected="${obj.product.productId==a.getProductId()}"
+                th:value="${a.getProductId()}" th:text="${a.getColorName()}">
+    </select>
+    <br/>  <label for="mc">Выберите материал</label>
+    <select  th:field="*{material.materialId}" id="mc">
+        <option value="0">Все</option>
+        <option th:each="a:${materials}" th:selected="${obj.material.materialId==a.getMaterialId}"
+                th:value="${a.getMaterialId}" th:text="${a.getName}">
+    </select>
+
+
+    <br/>  <label for="materialQuantity">Введите количество</label>
+    <input type="number" th:field="*{materialQuantity}" id="materialQuantity">
+    <div style="color: red" th:if="${#fields.hasErrors('materialQuantity')}" th:errors="*{materialQuantity}"></div>
+
+
+    <br/> <label for="q">Введите описание</label>
+    <input type="text" th:field="*{description}" id="q">
+    <div style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+
+    <br/>
+    <input type="submit" value="Изменить">
+
+</form>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -50,35 +50,49 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <header style="background:blue;height:30px">
+    <header style="background:blue;height:50px">
         <div class="container">
-            <div style="display: inline-block;color:white;">
+            <div style="display: inline-block;color:white;position:absolute;left:1px">
                 <form th:method="GET" action="/">
-                <button style="border:none;background:none;color:white;font-size: 16px;">Главная</button>
+                <button style="border:none;background:none;color:white;font-size: 26px;">Главная</button>
                 </form>
             </div>
-            <div style="display: inline-block;" class="dropdown">
-                <button style="border:none;background:none;color:white;font-size: 16px;"type="button"
+            <div style="display: inline-block;position:absolute;left:120px" class="dropdown">
+                <button style="border:none;background:none;color:white;font-size: 26px;"type="button"
                         data-toggle="dropdown">Выбор таблицы
                     <span class="caret"></span></button>
                 <ul class="dropdown-menu">
+                    <div sec:authorize="hasRole('airat')">
                     <li><a href="/staff/findingStaffs">Сотрудники</a></li>
                     <li><a href="/department/findDepartment">Отделы</a></li>
                     <li><a href="/maintenance/findMaintenance">Техобслуживание</a></li>
                     <li><a href="/machine/findMachine">Оборудование</a></li>
-                    <li><a href="/material/find">Материалы</a></li>
-                    <li><a href="/product/findingProducts">Продукты</a></li>
                     <li><a href="/machineType/find">Тип оборудования</a></li>
                     <li><a href="/machineStatus/find">Статус оборудования</a></li>
                     <li><a href="/machineStorage/find">Склад оборудования</a></li>
+                    <li><a href="/factory/find">Заводы</a></li>
                     <li><a href="/manufacture/find">Производство</a></li>
+                    </div>
+                    <div sec:authorize="hasRole('khamit')">
+                    <li ><a href="/manufacture/find">Производство</a></li>
+                    <li><a href="/material/find">Материалы</a></li>
                     <li><a href="/materialStorage/find">Склад материала</a></li>
+                    <li><a href="/product/findingProducts">Продукты</a></li>
+                    <li><a href="/compositionOfProduct/find">Состав продукта</a></li>
                     <li><a href="/productStorage/find">Склад продуктов</a></li>
+                    <li><a href="/customer/find">Заказчики</a></li>
+                    <li><a href="/order/find">Заказ</a></li>
+                    <li><a href="/deliveryCompany/find">Заказчики материалов</a></li>
+                    <li><a href="/materialDelivery/find">Заказ материалов</a></li>
+                    <li><a href="/process/find">Процесса</a></li>
+                    <li><a href="/processStage/find">Этапы процесса</a></li>
+                    </div>
+
                 </ul>
             </div>
             <div style="display: inline-block;color:white;position:absolute;right:1px">
                 <form th:method="GET" action="/login">
-                    <button style="border:none;background:none;color:white;font-size: 16px;">сменить пользователя</button>
+                    <button style="border:none;background:none;color:white;font-size: 26px;">Сменить пользователя</button>
                 </form>
             </div>
         </div>

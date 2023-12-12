@@ -16,7 +16,7 @@ public class Factory {
     @Column(name = "factory_id", nullable = false)
     private int factoryId;
 
-    @NotEmpty    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @NotEmpty    @Pattern(regexp = "[А-ЯЁ][а-яё]+[. а-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "adress", nullable = true, length = 30)
     private String adress;
 
@@ -30,7 +30,9 @@ public class Factory {
     @JoinColumn(name = "staff_id")
     private Staff staffId;
 
-
+    public Factory(){
+        this.staffId=new Staff();
+    }
 
     public int getFactoryId() {
         return factoryId;

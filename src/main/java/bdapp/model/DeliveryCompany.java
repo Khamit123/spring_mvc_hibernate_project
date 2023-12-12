@@ -13,9 +13,11 @@ public class DeliveryCompany {
     @Id
     @Column(name = "delivery_company_id", nullable = false)
     private int id;
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название компании должно содержать минимум две буквы и начинаться с заглавной буквы")
-    @Column(name = "delivery_company_name", nullable = true, length = 30)
     @Length(max = 30,message ="Максимальная длина 30" )
+    @Column(name = "delivery_company_name", nullable = true, length = 30)
     private String name;
 
     @NotNull(message = "Не должно быть пустым")
