@@ -25,7 +25,7 @@ public class ProductStorageDAO {
         return s;
     }
 
-    public List<MaterialStorage> getFind(ProductStorage obj){
+    public List<ProductStorage> getFind(ProductStorage obj){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
         String name=obj.getName();
@@ -50,8 +50,8 @@ public class ProductStorageDAO {
         else quantity="quantity >="+obj.getQuantity();
 
 
-        Query query= session.createQuery("from ProductStorage where  name like "+name+"and adress like "+address+"and "+id+"and "+quantity);
-        List s =query.getResultList();
+        List<ProductStorage> s= session.createQuery("from ProductStorage where  " +
+                "name like "+name+"and adress like "+address+"and "+id+"and "+quantity).getResultList();
 
         session.getTransaction().commit();
 

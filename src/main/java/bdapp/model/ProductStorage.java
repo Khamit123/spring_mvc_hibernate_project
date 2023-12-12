@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "product_storage", schema = "pen_factory")
 public class ProductStorage {
@@ -70,4 +72,16 @@ public class ProductStorage {
         this.quantity = quantity;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductStorage that = (ProductStorage) o;
+        return quantity == that.quantity && Objects.equals(name, that.name) && Objects.equals(adress, that.adress) && Objects.equals(materialId, that.materialId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, adress, materialId, quantity);
+    }
 }

@@ -50,9 +50,8 @@ public class MaterialStorageDAO {
         else quantity="quantity >="+obj.getQuantity();
 
 
-        Query query= session.createQuery("from MaterialStorage where  name like "+name+"and adress like "+address+"and "+id+"and "+quantity);
-        List s =query.getResultList();
-
+        List<MaterialStorage> s= session.createQuery("from MaterialStorage where  name like "+name+"and adress like "+address+"and "+id+"and "+quantity).list();
+        s.stream().forEach(System.out::println);
         session.getTransaction().commit();
 
         return s;
