@@ -20,11 +20,9 @@ public class Material {
     private String name;
 
     @Column(name = "units_of_measurement")
-    @Pattern(regexp = "\\d (кг||мл)",message = "Единицы измерения должны быть подобны ? кг/мл(?-любое число")
     private String unitsOfMeasurement;
     @Column(name = "price")
-    @NotNull
-    @Min(1)
+    @Min(value = 1,message = "Минимальное значение 1")
     private int price;
 
 //    @ManyToOne

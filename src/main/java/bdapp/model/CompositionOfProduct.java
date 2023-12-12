@@ -23,7 +23,7 @@ public class CompositionOfProduct {
     @JoinColumn(name = "material_id")
     private Material material;
     @Column(name = "material_quntity")
-    @Min(1)
+    @Min(value = 1,message = "Минимальное значение 1")
     private int materialQuntity;
 
     public Product getProduct() {

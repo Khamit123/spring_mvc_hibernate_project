@@ -18,22 +18,23 @@
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
-<form style="" th:method="GET" th:action="@{/order/find}" th:object="${obj}">
+<form style="" th:method="GET" th:action="@{/materialDelivery/find}" th:object="${obj}">
 
 
-    <label for="product">Выберите продукт</label>
-    <select  id="product"  th:field="*{product.name}">
+    <label for="material">Выберите материал</label>
+    <select  id="material"  th:field="*{material.name}">
         <option value="" >Любой</option>
-        <option th:each="prdouc:${products}"
-                th:selected="${obj.getProduct().getName()==prdouc.name}"
-                th:value="${prdouc.getColorName()}" th:text="${prdouc.getColorName()}">
+        <option th:each="mat:${materials}"
+                th:selected="${obj.getMaterial().name==mat.name}"
+                th:value="${mat.name}" th:text="${mat.name}">
     </select>
+
     <label for="customer">Выберите заказчика</label>
-    <select  id="customer"  th:field="*{customer.name}">
+    <select  id="customer"  th:field="*{deliveryCompany.name}">
         <option value="" >Любой</option>
-        <option th:each="custome:${customers}"
-                th:selected="${obj.getCustomer().getName()==custome.name}"
-                th:value="${custome.name}" th:text="${custome.getName()}">
+        <option th:each="comp:${companies}"
+                th:selected="${obj.deliveryCompany.name==comp.name}"
+                th:value="${comp.name}" th:text="${comp.name}">
     </select>
 
     <label for="date">Выберите дату заказа</label>
@@ -52,23 +53,20 @@
     <tbody>
 
     <tr th:each="o:${objs}">
-        <td><span th:text="${o.getCustomer().getName()}">  </span></td>
-        <td><span th:text="${o.getProduct().getColorName()}"> </span></td>
-        <td><span th:text="${o.getDateOfOrder()}"> </span></td>
-        <td><span th:text="${o.getDateOfExecution()}"> </span></td>
-        <td><span th:text="${o.getStatus()}"> </span></td>
-        <td><span th:text="${o.getDeliveryAdress()}"> </span></td>
+        <td><span th:text="${o.deliveryCompany.name}">  </span></td>
+        <td><span th:text="${o.material.name}"> </span></td>
+        <td><span th:text="${o.materialQuantity}"> </span></td>
         <td><span th:text="${o.getPrice()}"> </span></td>
-        <td><span th:text="${o.getProductQuantity()}"> </span></td>
-        <td><span th:text="${o.getDateOfUpdate()}"> </span></td>
-        <td><span th:text="${o.getDateOfRecord()}"> </span></td>
-        <td><form th:method="GET" th:action="@{/order/update/{id} (id=${o.getId()})} ">
+        <td><span th:text="${o.getOrderStatus()}"> </span></td>
+        <td><span th:text="${o.getDeliveryDate()}"> </span></td>
+        <td><span th:text="${o.getDateOfOrder()}"> </span></td>
+        <td><form th:method="GET" th:action="@{/materialDelivery/update/{id} (id=${o.getId()})} ">
             <button>Изменить</button>
         </form></td>
     </tr>
     </tbody>
 </table>
-<form th:method="GET" th:action="@{/order/add}">
+<form th:method="GET" th:action="@{/materialDelivery/add}">
     <input type="submit" value="Добавить новый заказ">
 </form>
 </body>
