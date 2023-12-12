@@ -20,9 +20,15 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="e33a5f2d-6662-4000-8b4d-095069ba2832" object-ref="schemas/pen_factory/tables/product_storage" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="e33a5f2d-6662-4000-8b4d-095069ba2832" dataset="pen_factory.product_storage" active-filter-id="23e4ad93-7d4c-4c7b-831f-22b5f5f1460e">
+      <filter id="23e4ad93-7d4c-4c7b-831f-22b5f5f1460e" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="e33a5f2d-6662-4000-8b4d-095069ba2832" dataset="pen_factory.material_storage" active-filter-id="" />
     <filter-actions connection-id="e33a5f2d-6662-4000-8b4d-095069ba2832" dataset="pen_factory.machinery" active-filter-id="30f431c0-05c9-4a0e-9c91-f1bdd66e34fe">
       <filter id="30f431c0-05c9-4a0e-9c91-f1bdd66e34fe" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>

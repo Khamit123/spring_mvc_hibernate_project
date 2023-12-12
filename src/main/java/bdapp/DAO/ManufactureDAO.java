@@ -58,7 +58,7 @@ public class ManufactureDAO {
         if(obj.getProductQuantity()==0){
             quantity="1=1";
         }
-        else quantity="productQuantity >='"+obj.getProductQuantity()+"'";
+        else quantity="productQuantity >="+obj.getProductQuantity();
         Query query= session.createQuery("from Manufacture where "+ factoryId+" and "+date+" and "+productId+" and "+quantity);
         List s =query.getResultList();
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/manufacture/add}" th:object="${obj}">
+    <label for="date">Введите дату</label>
+    <input type="date" th:field="*{date}" id="date">
+    <div style="color: red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></div>
+    <br/> <label for="f">Выберите завод</label>
+    <select th:field="*{factory.factoryId}" id="f">
+        <option th:each="a:${factories}" th:selected="${obj.factory.factoryId==a.getFactoryId}"
+                th:value="${a.getFactoryId}" th:text="${a.getName}">
+    </select>
+    <br/> <label for="p">Выберите продукт</label>
+    <select th:field="*{product.productId}" id="p">
+        <option th:each="a:${products}" th:selected="${obj.product.productId==a.getProductId}"
+                th:value="${a.getProductId}" th:text="${a.getColorName}">
+    </select>
+    <label for="q">Введите количество продукта</label>
+    <input type="number" th:field="*{productQuantity}" id="q">
+    <div style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></div>
+
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

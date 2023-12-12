@@ -1,6 +1,7 @@
 package bdapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -9,7 +10,6 @@ import jakarta.validation.constraints.Pattern;
 public class Manufacture {
     @Id
     @Column(name = "manufacture_id", nullable = false)
-    @NotEmpty
     private int id;
 
     @Column(name = "date_of_production")
@@ -29,7 +29,7 @@ public class Manufacture {
     private Product product;
 
     @Column(name = "product_quantity")
-    @NotEmpty
+    @Min(value = 1,message = "Должно быть больше 0")
     private int productQuantity;
 
     public Manufacture() {
