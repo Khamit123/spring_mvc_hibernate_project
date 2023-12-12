@@ -49,7 +49,7 @@ public class CustomerController {
         try{
             DAO.delete(obj);
         }catch (Exception e){
-            model.addAttribute("msg", List.of("Для удаления этого статуса необходимо:"," 1.Чтобы ни одно оборудования не принадлежало этому статусу"));
+            model.addAttribute("msg", List.of("Для удаления этого заказчика необходимо:"," 1.Чтобы не было заказа с данным заказчиком"));
             return "/customer/error";
         }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 
 @Entity
@@ -35,13 +36,13 @@ public class Order {
     private String status;
 
     @Column(name = "delivery_adress", nullable = true, length = 45)
-    // TODO: 11.12.2023 Добавит валидацию
+    @Pattern(regexp = "[А-ЯЁ][а-яё]+[. А-ЯЁа-яё0-9]*",message = "Адрес должен содержать минимум две буквы и начинаться с заглавной буквы")
     private String deliveryAdress;
 
     @Column(name = "price", nullable = true)
     private int price;
 
-    @Min(1)
+    @Min(value = 1,message = "Минимальное значение 1")
     @Column(name = "product_quantity", nullable = true)
     private int productQuantity;
 

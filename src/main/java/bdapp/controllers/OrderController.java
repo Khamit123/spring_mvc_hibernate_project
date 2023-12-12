@@ -54,6 +54,8 @@ public class OrderController {
     public String updateGet(@PathVariable("id") int id, Model model){
         Order obj=DAO.getOne(id);
         model.addAttribute("obj",obj);
+        model.addAttribute("products",DAO.getAllProd());
+        model.addAttribute("customers",DAO.getAllCustomer());
         return "order/update";
 
     }

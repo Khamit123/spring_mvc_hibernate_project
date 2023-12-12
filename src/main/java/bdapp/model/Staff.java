@@ -3,6 +3,7 @@ package bdapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -45,7 +46,8 @@ public class Staff {
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "email")
-    @Email(message = "Почта должна соответсвовать виду ???@???(знак вопроса - любой символ,причем до знака @ должно быть 2 знака)")
+    @Pattern(regexp = "([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)",message = "Почта должна соответсвовать виду ???@???.??(знак вопроса - любой символ,причем до знака @ должно быть 2 знака)")
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String email;
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")

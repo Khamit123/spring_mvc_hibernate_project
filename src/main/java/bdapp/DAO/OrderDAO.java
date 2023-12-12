@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -38,10 +39,32 @@ public class OrderDAO {
         return products;
     }
 
-    public List<Order> getFind(Order obj){
-        Session session =sessionFactory.getCurrentSession();
+    public List<Order> getFind(Order obj) {
+        Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        String product=obj.getProduct().getName();
+        String product = obj.getProduct().getName();
+        System.out.println(product + "DAO");
+        List<String> namecolor = List.of("");
+        if(product!=null) {
+            namecolor = Arrays.stream(product.split(" ")).toList();
+        }
+        String color="";
+        if (namecolor.size()==2){
+            product = namecolor.get(0);
+            color = namecolor.get(1);
+        }
+        if(color.equals("Синий")){
+            color="b";
+        }
+        if(color.equals("Красный")){
+            color= "r";
+        }
+        if(color.equals("Зелёный")){
+            color= "g";
+        }
+        if(color.equals("Белый")){
+            color= "w";
+        }
         String customer=obj.getCustomer().getName();
         String dateOrder=obj.getDateOfOrder();
         if(product==null || product==""){
@@ -54,6 +77,11 @@ public class OrderDAO {
         }
         else customer="'%"+customer+"%'";
 
+        if(color==null || color==""){
+            color="'%'";
+        }
+        else color="'%"+color+"%'";
+
         if(dateOrder==null || dateOrder==""){
             dateOrder="1=1";
         }
@@ -61,7 +89,7 @@ public class OrderDAO {
 
 
         Query query= session.createQuery("from Order where  product.name like "+product
-                + " and customer.name like " + customer +" and " + dateOrder);
+                + " and customer.name like " + customer +" and " + dateOrder + " and product.color like  " + color);
         List s =query.getResultList();
 
         session.getTransaction().commit();

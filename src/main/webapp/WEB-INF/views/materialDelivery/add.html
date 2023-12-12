@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление</title>
+</head>
+<div th:insert="~{header :: #head}"></div>
+<body>
+<form style="" th:method="POST" th:action="@{/materialDelivery/add}" th:object="${obj}">
+    <label for="material">Выберите материал</label>
+    <select  id="material"  th:field="*{material.materialId}">
+        <option value="0" >Любой</option>
+        <option th:each="mat:${materials}"
+                th:selected="${obj.getMaterial().name==mat.name}"
+                th:value="${mat.materialId}" th:text="${mat.name}">
+    </select>
+
+    <label for="customer">Выберите заказчика</label>
+    <select  id="customer"  th:field="*{deliveryCompany.id}">
+        <option value="0" >Любой</option>
+        <option th:each="comp:${companies}"
+                th:selected="${obj.deliveryCompany.id==comp.name}"
+                th:value="${comp.id}" th:text="${comp.name}">
+    </select>
+
+    <label for="date">Выберите дату заказа</label>
+    <input type="date" th:field="*{dateOfOrder}" id="date">
+    <div style="color: red" th:if="${#fields.hasErrors('dateOfOrder')}" th:errors="*{dateOfOrder}"></div>
+    <br/>
+
+    <label for="datee">Выберите дату выполнения</label>
+    <input type="date" th:field="*{deliveryDate}" id="datee">
+    <div style="color: red" th:if="${#fields.hasErrors('deliveryDate')}" th:errors="*{deliveryDate}"></div>
+    <br/>
+
+    <label for="productQuantity">Введите количество материала</label>
+    <input type="number" th:field="*{materialQuantity}" id="productQuantity">
+    <div style="color: red" th:if="${#fields.hasErrors('materialQuantity')}" th:errors="*{materialQuantity}"></div>
+    <br/>
+
+    <label for="orderStatus">Введите статус</label>
+    <input type="text" th:field="*{orderStatus}" id="orderStatus">
+    <div style="color: red" th:if="${#fields.hasErrors('orderStatus')}" th:errors="*{orderStatus}"></div>
+    <br/>
+
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

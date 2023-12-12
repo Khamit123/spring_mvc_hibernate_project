@@ -16,10 +16,13 @@
     <label for="customer">Выберите продукт</label>
     <select  id="customer"  th:field="*{customer.id}">
         <option th:each="custome:${customers}"
-                th:selected="${obj.getProduct().getName()==custome.name}"
+                th:selected="${obj.getCustomer().getName()==custome.name}"
                 th:value="${custome.id}" th:text="${custome.getName()}">
     </select>
 
+    <input hidden type="hidden" th:field="*{status}" th:value="${obj.getStatus()}" id="status">
+    <input hidden type="date" th:field="*{dateOfUpdate}" th:value="${obj.getDateOfUpdate()}" id="dateup">
+    <input hidden type="date" th:field="*{dateOfRecord}" th:value="${obj.getDateOfRecord()}" id="dater">
     <label for="date">Выберите дату заказа</label>
     <input type="date" th:field="*{dateOfOrder}" id="date">
     <div style="color: red" th:if="${#fields.hasErrors('dateOfOrder')}" th:errors="*{dateOfOrder}"></div>
