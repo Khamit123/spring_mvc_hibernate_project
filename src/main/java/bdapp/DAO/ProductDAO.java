@@ -45,8 +45,7 @@ public class ProductDAO {
 
         Query query= session.createQuery("from Product where  name like "+name+" and "+price +
                 "and color like "+color);
-        List s =query.getResultList();
-
+        List<Product> s =query.getResultList();
         session.getTransaction().commit();
 
         return s;
@@ -78,6 +77,9 @@ public class ProductDAO {
         session.getTransaction().commit();
 
     }
+//    public List<Integer> getAllFunc(List<Product> products){
+//
+//    }
     public  void addProduct(Product product){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -103,4 +105,6 @@ public class ProductDAO {
     public List<String> getNames() {
         return names;
     }
+
+
 }

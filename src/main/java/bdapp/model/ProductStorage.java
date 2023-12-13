@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Objects;
 
@@ -13,16 +14,20 @@ import java.util.Objects;
 public class ProductStorage {
     @Id
     @Column(name = "storage_name", nullable = false)
-    @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Length(max=45,message = "Должно содержать максиму 45 символов")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
     private String name;
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "adress")
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @Length(max=50,message = "Должно содержать максиму 50 символов")
     private String adress;
 
 
-    @NotNull
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")

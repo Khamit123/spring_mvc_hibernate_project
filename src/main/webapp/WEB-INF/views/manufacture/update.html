@@ -21,7 +21,7 @@
                 th:value="${a.getProductId}" th:text="${a.getColorName}">
     </select>
     <label for="q">Введите количество продукта</label>
-    <input type="number" th:field="*{productQuantity}" id="q">
+    <input  type="number" max="10000000" th:field="*{productQuantity}" id="q">
     <div style="color: red" th:if="${#fields.hasErrors('productQuantity')}" th:errors="*{productQuantity}"></div>
     <input type="submit" value="Изменить">
 

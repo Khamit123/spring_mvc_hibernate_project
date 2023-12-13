@@ -1034,8 +1034,8 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="pen_factory">
-      <IntrospectionTimestamp>2023-12-12.22:18:13</IntrospectionTimestamp>
-      <LocalIntrospectionTimestamp>2023-12-12.16:18:13</LocalIntrospectionTimestamp>
+      <IntrospectionTimestamp>2023-12-13.19:45:23</IntrospectionTimestamp>
+      <LocalIntrospectionTimestamp>2023-12-13.13:45:23</LocalIntrospectionTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="291" parent="1" name="performance_schema">
@@ -8771,7 +8771,7 @@ material_id</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="1812" parent="440" name="order_id">
-      <AutoIncrement>6</AutoIncrement>
+      <AutoIncrement>12</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>

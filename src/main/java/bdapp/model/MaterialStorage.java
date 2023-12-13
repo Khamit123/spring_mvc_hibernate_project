@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Objects;
 
@@ -13,12 +14,16 @@ import java.util.Objects;
 public class MaterialStorage {
     @Id
     @Column(name = "storage_name", nullable = false)
-    @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Length(max = 50,message ="Максимальная длина 50" )
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
     private String name;
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "adress")
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @Length(max = 45,message ="Максимальная длина 45" )
     private String adress;
 
 

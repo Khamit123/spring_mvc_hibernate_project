@@ -19,27 +19,29 @@ public class Staff {
     private int id;
 
     @Column(name = "name")
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Length(max = 30,message ="Максимальная длина 30" )
     @Pattern(regexp = "[А-ЯЁ][а-яё]+",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
 
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "last_name")
+    @Length(max = 30,message ="Максимальная длина 30" )
     @Pattern(regexp = "[А-ЯЁ][а-яё]+",message = "Фамилия должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String lastName;
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "middle_name")
+    @Length(max = 30,message ="Максимальная длина 30" )
     @Pattern(regexp = "[А-ЯЁ][а-яё]+",message = "Отчество должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String middleName;
-    @NotNull(message = "Не должно быть пустым")
     @Column(name = "salary")
-    @Max(10000000)
-    @Min(1)
+    @Max(value = 1000000,message = "Максимальное значение 1000000")
+    @Min(value = 1,message = "Минимальное значение 1")
     private int salary;
-    @NotNull(message = "Не должно быть пустым")
-    @NotEmpty(message = "Не должно быть пустым")
+
     @Column(name = "phone_number")
     @Pattern(regexp = "\\d{11}",message = "Номер телефона должен содержать 11 цифр")
     private String phoneNumber;
@@ -47,11 +49,12 @@ public class Staff {
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "email")
     @Pattern(regexp = "([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)",message = "Почта должна соответсвовать виду ???@???.??(знак вопроса - любой символ,причем до знака @ должно быть 2 знака)")
-    @Length(max = 30,message ="Максимальная длина 30" )
+    @Length(max = 100,message ="Максимальная длина 100" )
     private String email;
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "post")
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String post;
 
     @NotNull(message = "Не должно быть пустым")

@@ -24,11 +24,12 @@ public class MaterialDelivery {
     private int materialQuantity;
 
     @Column(name = "price", nullable = true)
+    @Min(value = 1,message = "Минимальное значение 1")
     private int price;
 
     @Column(name = "order_status", nullable = true, length = 10)
     @Length(max=10,message = "Должно содержать максиму 10 символов")
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+( )?[а-яё]*",message = "Статус должен содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Статус должен содержать минимум две буквы и начинаться с заглавной буквы")
     private String orderStatus;
 
     @Column(name = "delivery_date", nullable = true)

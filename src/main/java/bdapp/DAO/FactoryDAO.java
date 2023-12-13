@@ -17,7 +17,7 @@ public class FactoryDAO {
             .addAnnotatedClass(Product.class).addAnnotatedClass(Staff.class)
             .buildSessionFactory();
 
-    private List<String> names = new ArrayList<>(List.of("Название","адрес","Руководитель"));
+    private List<String> names = new ArrayList<>(List.of("Название","Адрес","Руководитель","Зарплата завода"));
 
     public List<Staff> getStaffs(){
         Session session =sessionFactory.getCurrentSession();
@@ -47,8 +47,10 @@ public class FactoryDAO {
         }
         else address="'%"+address+"%'";
         Query query= session.createQuery("from Factory where name like"+name+" and adress like"+address+" and "+StaffId);
-        List s =query.getResultList();
-
+        List<Factory> s =query.getResultList();
+        s.forEach(factory -> {
+            factory.setSalary((int)(session.createNativeQuery("select pen_factory.factorysalary(" + factory.getFactoryId() + ");").getResultList().get(0)));
+        });
         session.getTransaction().commit();
 
         return s;

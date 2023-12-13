@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Objects;
 
@@ -33,10 +34,11 @@ public class Machinery {
     @JoinColumn(name = "factory_id")
     private Factory factoryId;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "name", nullable = true, length = 30)
-    @Pattern(regexp = "[А-ЯЁ].[а-яё]+[ а-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String name;
 
     @NotNull

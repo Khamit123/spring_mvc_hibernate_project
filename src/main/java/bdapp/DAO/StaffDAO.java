@@ -21,7 +21,12 @@ public class StaffDAO {
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(Staff.class).addAnnotatedClass(Department.class)
             .buildSessionFactory();
-
+    public void procedure() {
+        Session session=sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        session.createNativeQuery("call pen_factory.newsalary(10,true)").executeUpdate();
+        session.getTransaction().commit();
+    }
     public List<Staff> getFindStaff(Staff staff){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();

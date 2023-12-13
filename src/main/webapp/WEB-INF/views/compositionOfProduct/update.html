@@ -22,7 +22,7 @@
                 th:value="${material.materialId}" th:text="${material.name}">
     </select>
     <br/>
-    <input type="number" th:field="*{materialQuntity}" id="price">
+    <input  type="number" max="10000000" th:field="*{materialQuntity}" id="price">
     <div style="color: red" th:if="${#fields.hasErrors('materialQuntity')}" th:errors="*{materialQuntity}"></div>
     <div style="color: red" th:if="${error!='null'}" th:text="${error}"></div>
 

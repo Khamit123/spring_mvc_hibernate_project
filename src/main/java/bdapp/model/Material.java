@@ -2,8 +2,10 @@ package bdapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Objects;
 
@@ -14,9 +16,11 @@ public class Material {
     @Id
     @Column(name = "material_id", nullable = false)
     private int materialId;
-
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "name")
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+( )?[а-яё]*",message = "Название материала должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @Length(max = 30,message ="Максимальная длина 30" )
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название материала должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String name;
 
     @Column(name = "units_of_measurement")

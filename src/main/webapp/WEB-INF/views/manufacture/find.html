@@ -7,7 +7,7 @@
     <style>
         /* Стили таблицы (IKSWEB) */
         table.iksweb{text-decoration: none;border-collapse:collapse;width:100%;text-align:center;}
-        table.iksweb th{font-weight:normal;font-size:14px; color:#ffffff;background-color:#354251;}
+        table.iksweb th{font-weight:normal;font-size:14px; color:#ffffff;background-color:#354251;text-align:center;}
         table.iksweb td{font-size:13px;color:#354251;}
         table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:10px 5px;line-height:13px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
         table.iksweb tr:hover td{color:#354251;cursor:default;}
@@ -22,7 +22,7 @@
     <label for="date">Выберите дату</label>
     <input type="date" th:field="*{date}" id="date">
     <br> <label for="ad">Введите количество продукта</label>
-    <input type="number" th:field="*{productQuantity}" id="ad">
+    <input  type="number" max="10000000" th:field="*{productQuantity}" id="ad">
     <br><label for="f">Выберите завод</label>
     <select  th:field="*{factory.factoryId}" id="f">
         <option value="0">Все</option>

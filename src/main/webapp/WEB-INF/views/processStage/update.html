@@ -23,7 +23,7 @@
 
 
     <br/>  <label for="machineQuantity">Введите количество</label>
-    <input type="number" th:field="*{machineQuantity}" id="machineQuantity">
+    <input  type="number" max="10000000" th:field="*{machineQuantity}" id="machineQuantity">
     <div style="color: red" th:if="${#fields.hasErrors('machineQuantity')}" th:errors="*{machineQuantity}"></div>
 
 

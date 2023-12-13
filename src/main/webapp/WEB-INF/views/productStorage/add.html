@@ -19,7 +19,7 @@
         <option th:each="a:${mats}" th:selected="${obj.materialId.productId==a.getProductId}"  th:value="${a.getProductId}" th:text="${a.getColorName}">
     </select>
     <label for="q">Введите количество</label>
-    <input type="number" th:field="*{quantity}" id="q">
+    <input type="number" max="10000000" th:field="*{quantity}" id="q">
     <div style="color: red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
     <input type="submit" value="Добавить">
 

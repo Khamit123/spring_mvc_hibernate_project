@@ -18,7 +18,7 @@
 
     <label for="price">Введите цену</label>
     <br/>
-    <input type="number" th:field="*{price}" id="price">
+    <input  type="number" max="10000000" th:field="*{price}" id="price">
     <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
     <br/>
     <input type="submit" value="Изменить">

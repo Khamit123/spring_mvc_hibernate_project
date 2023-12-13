@@ -2,7 +2,10 @@ package bdapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Objects;
 
@@ -13,8 +16,11 @@ public class Product {
     @Id
     @Column(name = "product_id")
     private int productId;
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[. А-ЯЁа-яё0-9]*",message = "Название продукта должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название продукта должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name")
+    @Length(max=30,message = "Должно содержать максиму 30 символов")
     private String name;
 
     @Column(name = "price")
@@ -113,5 +119,15 @@ public class Product {
         this.name = name;
         this.price = price;
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", color='" + color + '\'' +
+                '}';
     }
 }

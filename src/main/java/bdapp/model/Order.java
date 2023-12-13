@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 
 @Entity
@@ -34,7 +35,7 @@ public class Order {
 
     @Column(name = "status", nullable = true, length = 45)
     private String status;
-
+    @Length(max=45,message = "Должно содержать максиму 45 символов")
     @Column(name = "delivery_adress", nullable = true, length = 45)
     @Pattern(regexp = "[А-ЯЁ][а-яё]+[. А-ЯЁа-яё0-9]*",message = "Адрес должен содержать минимум две буквы и начинаться с заглавной буквы")
     private String deliveryAdress;

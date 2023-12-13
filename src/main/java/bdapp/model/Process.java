@@ -31,12 +31,14 @@ public class Process {
     private int materialQuantity;
     @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
-    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название компании должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Length(max = 30,message ="Максимальная длина 30" )
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название компании должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name", nullable = true, length = 30)
     private String name;
 
     @Column(name = "description", nullable = true)
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     private String description;
 
     public int getId() {

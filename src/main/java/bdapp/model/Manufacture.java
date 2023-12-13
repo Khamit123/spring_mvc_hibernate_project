@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 @Entity
-@Table(name = "manufacture", schema = "pen_factory", catalog = "")
+@Table(name = "manufacture", schema = "pen_factory")
 public class Manufacture {
     @Id
     @Column(name = "manufacture_id", nullable = false)
@@ -73,7 +73,11 @@ public class Manufacture {
         return productQuantity;
     }
 
-    public void setProductQuantity(int product_quantity) {
+    public void setProductQuantity(Integer product_quantity) {
+        if(product_quantity==null){
+            product_quantity=0;
+        }
+
         this.productQuantity = product_quantity;
     }
 }

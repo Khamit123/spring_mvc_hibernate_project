@@ -2,7 +2,9 @@ package bdapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
@@ -14,14 +16,17 @@ public class MachineStatus {
     @Column(name = "machine_status_id", nullable = false)
     private int machineStatusId;
 
-    @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name", nullable = true, length = 30)
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String name;
 
-    @NotEmpty
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "description", nullable = true, length = -1)
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Описание должно содержать минимум два символа и начинаться с заглавной буквы")
     private String description;
 
     public int getMachineStatusId() {

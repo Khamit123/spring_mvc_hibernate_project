@@ -4,25 +4,31 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "factory", schema = "pen_factory", catalog = "")
+@Table(name = "factory", schema = "pen_factory")
 public class Factory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "factory_id", nullable = false)
     private int factoryId;
 
-    @NotEmpty    @Pattern(regexp = "[А-ЯЁ][а-яё]+[. а-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Адрес должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "adress", nullable = true, length = 30)
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String adress;
 
-    @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Название должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name", nullable = true, length = 30)
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String name;
 
     @NotNull
@@ -77,5 +83,15 @@ public class Factory {
     @Override
     public int hashCode() {
         return Objects.hash(factoryId, adress, name, staffId);
+    }
+
+    transient private int salary;
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 }

@@ -20,10 +20,10 @@ public class Maintenance {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "staff_id")
     private Staff staffId;
-    @NotNull
+    @NotNull(message = "Не должно быть пустым")
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "what_done", nullable = true, length = -1)
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Должно содержать минимум два символа и начинаться с заглавной буквы")
     private String whatDone;
     @OneToMany(mappedBy = "maintenance",cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.LAZY)
     List<Machinery> machineryList;

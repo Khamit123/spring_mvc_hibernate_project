@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
@@ -14,10 +15,11 @@ public class MachineType {
     @Id
     @Column(name = "machine_type_id", nullable = false)
     private int machineTypeId;
-    @NotNull
-    @NotEmpty
-    @Pattern(regexp = "[А-ЯЁ][а-яё]+[ а-яё]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
+    @NotNull(message = "Не должно быть пустым")
+    @NotEmpty(message = "Не должно быть пустым")
+    @Pattern(regexp = "[А-ЯЁ]+[. А-ЯЁа-яё0-9]*",message = "Имя должно содержать минимум две буквы и начинаться с заглавной буквы")
     @Column(name = "name", nullable = true, length = 30)
+    @Length(max = 30,message ="Максимальная длина 30" )
     private String name;
     @NotNull
     @NotEmpty
