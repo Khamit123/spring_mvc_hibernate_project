@@ -47,7 +47,7 @@ public class ProcessStageDAO {
         if(material==null || material.equals("0")){
             material="1=1";
         }
-        else material="material.materialId = "+material;
+        else material="machineType.machineTypeId = "+material;
 
         if(product==null || product==""){
             product="'%'";

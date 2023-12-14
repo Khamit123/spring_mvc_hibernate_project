@@ -67,6 +67,7 @@ public class CompositionOfProductController {
         try{
             compositionOfProductDAO.delete(matId,prodId);
         }catch (Exception e){
+            e.printStackTrace();
             model.addAttribute("msg", List.of("Для удаления этого матриала необходимо:"," 1.Удалить его из таблицы Склад материалов", " 2.Удалить его из таблицы Состав продукта"));
             return "/compositionOfProduct/error";
         }
@@ -75,7 +76,7 @@ public class CompositionOfProductController {
     }
 
     @GetMapping("/add")
-    public String addtGet(@ModelAttribute("compositionOfProduct") CompositionOfProduct material,Model model){
+    public String addtGet(@ModelAttribute("compositionOfProduct") CompositionOfProduct compositionOfProduct,Model model){
         model.addAttribute("materials",compositionOfProductDAO.getAllMat());
         model.addAttribute("products",compositionOfProductDAO.getAllProd());
         return "/compositionOfProduct/add";

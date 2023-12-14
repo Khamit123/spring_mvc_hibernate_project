@@ -14,13 +14,12 @@
 
     <br/>  <label for="product">Выберите продукт</label>
     <select  th:field="*{product.productId}" id="product">
-        <option value="0">Все</option>
+
         <option th:each="a:${products}" th:selected="${obj.product.productId==a.getProductId()}"
                 th:value="${a.getProductId()}" th:text="${a.getColorName()}">
     </select>
     <br/>  <label for="mc">Выберите материал</label>
     <select  th:field="*{material.materialId}" id="mc">
-        <option value="0">Все</option>
         <option th:each="a:${materials}" th:selected="${obj.material.materialId==a.getMaterialId}"
                 th:value="${a.getMaterialId}" th:text="${a.getName}">
     </select>

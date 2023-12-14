@@ -59,7 +59,7 @@ public class DeliveryCompanyController {
 
     @GetMapping("/add")
     public String addGet(@ModelAttribute("obj") DeliveryCompany obj,Model model){
-        return "/customer/add";
+        return "/deliveryCompany/add";
     }
 
     @PostMapping("/add")

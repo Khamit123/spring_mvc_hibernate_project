@@ -71,10 +71,10 @@ public class MaterialDAO {
         session.getTransaction().commit();
 
     }
-    public void delete(Material material){
+    public void delete(int id){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Material material1= session.get(Material.class,material.getMaterialId());
+        Material material1= session.get(Material.class,id);
         session.delete(material1);
         session.getTransaction().commit();
 

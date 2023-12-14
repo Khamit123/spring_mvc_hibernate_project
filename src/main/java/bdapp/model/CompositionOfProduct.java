@@ -13,13 +13,13 @@ public class CompositionOfProduct {
 
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},fetch = FetchType.EAGER)
     @JoinColumn(name = "material_id")
     private Material material;
     @Column(name = "material_quntity")

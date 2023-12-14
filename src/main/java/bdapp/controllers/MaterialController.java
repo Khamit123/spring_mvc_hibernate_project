@@ -47,9 +47,9 @@ public class MaterialController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@ModelAttribute("material") Material material,@PathVariable("id") int id,Model model){
+    public String delete(@PathVariable("id") int id,@ModelAttribute("material") Material material,Model model){
         try{
-            materialDAO.delete(material);
+            materialDAO.delete(id);
         }catch (Exception e){
             model.addAttribute("msg", List.of("Для удаления этого матриала необходимо:"," 1.Удалить его из таблицы Склад материалов", " 2.Удалить его из таблицы Состав продукта"));
             return "/material/error";

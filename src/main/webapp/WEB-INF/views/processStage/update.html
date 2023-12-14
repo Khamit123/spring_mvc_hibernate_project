@@ -10,13 +10,13 @@
 
     <br/>  <label for="mact">Выберите тип машины</label>
     <select  th:field="*{machineType.machineTypeId}" id="mact">
-        <option value="0">Все</option>
+
         <option th:each="a:${mactypes}" th:selected="${obj.machineType.getMachineTypeId()==a.getMachineTypeId()}"
                 th:value="${a.getMachineTypeId()}" th:text="${a.name}">
     </select>
     <br/>  <label for="pros">Выберите процесс</label>
     <select  th:field="*{process.id}" id="pros">
-        <option value="0">Все</option>
+
         <option th:each="a:${proceses}" th:selected="${obj.process.id==a.getId}"
                 th:value="${a.getId}" th:text="${a.getName}">
     </select>

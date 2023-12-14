@@ -94,8 +94,8 @@ public class CompositionOfProductDAO {
     public void delete(int matId,int prodId){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        CompositionOfProduct material1= (CompositionOfProduct)session.createQuery("from CompositionOfProduct where product.product_id = "
-                + prodId + "material.materailId =" + matId).getResultList().get(0);
+        CompositionOfProduct material1= (CompositionOfProduct)session.createQuery("from CompositionOfProduct where product.productId = "
+                + prodId + " and material.materialId =" + matId).getResultList().get(0);
         session.delete(material1);
         session.getTransaction().commit();
 
@@ -104,9 +104,12 @@ public class CompositionOfProductDAO {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         try {
+            compositionOfProduct.setProduct(session.get(Product.class,compositionOfProduct.getProduct().getProductId()));
+            compositionOfProduct.setMaterial(session.get(Material.class,compositionOfProduct.getMaterial().getMaterialId()));
             session.persist(compositionOfProduct);
         }
         catch (Exception e) {
+            e.printStackTrace();
         throw  e;
         }
         finally {

@@ -6,7 +6,7 @@
 </head>
 <div th:insert="~{header :: #head}"></div>
 <body>
-<form style="" th:method="PATCH" th:action="@{/material/update}" th:object="${material}">
+<form style="" th:method="PATCH" th:action="@{/material/update/{id} (id=${material.getMaterialId()})}" th:object="${material}">
     <label for="name">Введите название материала</label>
     <input type="text" th:field="*{name}" id="name">
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>

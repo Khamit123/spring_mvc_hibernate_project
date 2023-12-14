@@ -52,7 +52,7 @@ public class ProductController {
     @DeleteMapping("/deleteProduct/{id}")
     public String deleteProduct(@ModelAttribute("product") Product product,@PathVariable int id,Model model){
         try{
-            productDAO.deleteProduct(product);
+            productDAO.deleteProduct(id);
         }catch (Exception e){
             model.addAttribute("msg", List.of("Для удаления этого продукта необходимо:"," 1.Удалить его из таблицы Склад продуктов", " 2.Удалить его из таблицы Состав продукта"));
             return "/Product/error";

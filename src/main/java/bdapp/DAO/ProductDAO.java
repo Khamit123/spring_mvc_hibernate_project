@@ -69,10 +69,10 @@ public class ProductDAO {
         session.getTransaction().commit();
 
     }
-    public void deleteProduct(Product product){
+    public void deleteProduct(int id){
         Session session =sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Product product1= session.get(Product.class,product.getProductId());
+        Product product1= session.get(Product.class,id);
         session.delete(product1);
         session.getTransaction().commit();
 
