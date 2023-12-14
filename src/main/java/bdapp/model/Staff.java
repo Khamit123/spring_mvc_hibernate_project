@@ -55,6 +55,7 @@ public class Staff {
     @NotEmpty(message = "Не должно быть пустым")
     @Column(name = "post")
     @Length(max = 30,message ="Максимальная длина 30" )
+    @Pattern(regexp = "[А-ЯЁ][ а-яё]+",message = "Должность должно содержать минимум две буквы и начинаться с заглавной буквы")
     private String post;
 
     @NotNull(message = "Не должно быть пустым")
